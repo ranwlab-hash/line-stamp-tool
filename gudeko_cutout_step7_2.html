@@ -1,0 +1,176 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ぐでこ スタンプ切り抜き</title><style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f6fb;color:#222;margin:0;padding:16px}main{max-width:780px;margin:auto}section{background:white;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 2px 9px #0001}h1{font-size:23px}button,.btn{background:#2367d9;color:white;border:0;border-radius:9px;padding:12px;font-size:15px;margin:4px;cursor:pointer}button.secondary{background:#555}button:disabled{opacity:.4}input[type=file]{max-width:100%}canvas{display:block;max-width:100%;height:auto;touch-action:none;background:repeating-conic-gradient(#ddd 0 25%,white 0 50%) 0/20px 20px;border:1px solid #ccc}#editor{max-width:none;touch-action:none} #previewViewport{overflow:hidden;width:100%;height:360px;position:relative;border:1px solid #ccc;touch-action:none;background:repeating-conic-gradient(#ddd 0 25%,white 0 50%) 0/20px 20px} #previewViewport canvas{position:absolute;left:0;top:0;max-width:none;border:0;background:transparent;transform-origin:0 0} .editor-viewport{overflow:hidden;width:100%;height: min(65vh,520px);border:1px solid #ccc;position:relative;background:#eee;touch-action:none} .editor-viewport canvas{position:absolute;left:0;top:0;border:0;transform-origin:0 0} .modehint{font-size:13px;color:#444} label{display:block;margin:12px 0}input[type=range]{width:70%}small{color:#555}.chips{display:flex;flex-wrap:wrap}.chips button.active{background:#e75a80}.status{font-weight:600;color:#225caa}a{color:#2367d9}.toolrow{display:flex;flex-wrap:wrap;gap:5px;align-items:center}.toolrow button.active{background:#e75a80}.toolrow button{font-size:14px;padding:10px}.toolrow button:disabled{opacity:.35}#previewViewport{height:400px}#brushCursor{position:absolute;pointer-events:none;border:2px solid #e50069;border-radius:50%;display:none;box-sizing:border-box;z-index:5} #placementViewport{height:360px;overflow:hidden;position:relative;border:1px solid #bbb;touch-action:none;background:repeating-conic-gradient(#ddd 0 25%,#fff 0 50%) 0/20px 20px}#placementCanvas{position:absolute;left:0;top:0;max-width:none;border:0;background:transparent;touch-action:none} .placement-note{color:#555;font-size:13px}#polygon.is-drawing{background:#e74676;color:white;box-shadow:0 0 0 3px #ffd4df inset}#polygon.is-done{background:#27855b;color:white}#modeBadge{display:inline-block;margin:8px 0;padding:7px 12px;border-radius:8px;font-size:14px;font-weight:700;background:#e8edf5;color:#344052}#modeBadge.drawing{background:#ffe1ea;color:#b41549}#modeBadge.done{background:#dcf5e6;color:#17613b}#saveFrame{display:none}#placementViewport{isolation:isolate;background:repeating-conic-gradient(#dedede 0 25%,#fff 0 50%) 0/20px 20px;width:100%;height:auto;aspect-ratio:370/320;max-height:none;padding:0;box-sizing:border-box;border:2px solid #64748b;border-radius:4px}#placementCanvas{z-index:2;background:transparent;width:100%;height:100%;transform:none}#saveFrameLabel{font-size:14px;font-weight:700;color:#334155;margin:10px 0 5px}#fitWarning{font-size:13px;color:#a33b22;margin:8px 0;line-height:1.5}  .editor-tools{display:grid;gap:10px;margin:12px 0}.mode-controls,.edit-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mode-controls button,.edit-actions button{margin:0;min-height:52px;font-size:16px;font-weight:700}.mode-btn{background:#e9eef7;color:#334155;border:2px solid #cbd5e1}.mode-btn.selected{background:#2468dc;color:#fff;border-color:#2468dc}.mode-btn.is-drawing,.mode-btn.is-drawing.selected{background:#df3569;color:#fff;border-color:#df3569}.mode-btn.is-done{background:#27855b;color:#fff;border-color:#27855b}.zoom-controls{display:flex;align-items:center;justify-content:space-between;gap:5px}.zoom-controls button{flex:1;margin:0;background:#4b5563}.zoom-controls span{min-width:52px;text-align:center;font-weight:700}.edit-actions #finish{background:#218657}.edit-actions #undo{background:#e7edf5;color:#334155}.danger-menu{border:1px solid #dbe1e9;border-radius:10px;padding:10px 12px;margin-top:6px;background:#f8fafc}.danger-menu summary{font-size:13px;color:#526174;cursor:pointer}.danger{background:#b83a49}.primary-action{background:#2468dc;font-weight:700}#placementViewport{border:2px solid #64748b!important}#placementCanvas{inset:0}#saveFrameLabel{color:#225caa} #brushSizePreview{display:flex;align-items:center;gap:12px;background:#f3f6fb;border:1px solid #d9e2f0;border-radius:12px;padding:10px 12px;margin:8px 0}#brushSizeCircleBox{width:106px;height:106px;flex:0 0 106px;border-radius:10px;background:repeating-conic-gradient(#e2e2e2 0 25%,#fff 0 50%) 0/16px 16px;display:grid;place-items:center}#brushSizeCircle{border:2px solid #e50069;border-radius:50%;box-sizing:border-box;background:#e5006920;width:18px;height:18px;box-shadow:0 0 0 1px #fff}#brushSizePreviewText{font-size:13px;line-height:1.6;color:#344052} </style></head><body><main><h1>✂️ ぐでこ スタンプ切り抜き（スマホ操作改善 STEP 7.2）</h1><p>iPhone・Windows・MacBook対応。画像は端末内で処理し、サーバーには送信しません。</p><section><label>① 4列×2行の画像を選択 <input id="file" type="file" accept="image/*"></label><p id="status" class="status">画像を選択してください</p><div class="chips" id="cells"></div></section><section><strong>② スタンプを選んで輪郭を調整</strong><p><small>「輪郭を指定」では、タップで点を追加、ドラッグで画面移動できます。残したいスタンプの周囲をタップして囲み、「囲みを確定」を押してください。隣の枠にはみ出す文字も囲めます。</small></p><div class="editor-viewport" id="viewport"><canvas id="editor"></canvas></div><div id="modeBadge">✋ 移動モード</div><p class="modehint" id="modehint">1本指で移動・2本指で拡大縮小。＋・－ボタンでも拡大できます。</p><div class="editor-tools"><div class="mode-controls"><button id="panmode" class="mode-btn">✋ 移動</button><button id="polygon" class="mode-btn">✏️ 輪郭指定</button></div><div class="zoom-controls"><button id="zoomOut" class="secondary">－ 縮小</button><span id="zoomLabel">100%</span><button id="zoomIn" class="secondary">＋ 拡大</button></div><div class="edit-actions"><button id="undo" class="secondary">↶ 1点戻す</button><button id="finish" disabled>✓ 囲みを確定</button></div><details class="danger-menu"><summary>⚙ その他の操作（リセット・囲み解除）</summary><div class="toolrow"><button id="home" class="secondary">表示をリセット</button><button id="reset" class="danger">囲みを解除</button></div><small>確認してから実行します。</small></details></div><p class="modehint">PCショートカット：Ctrl / ⌘ + Z＝戻す、Shift + 「 / 」＝縮小 / 拡大、Space + ドラッグ＝画面移動</p><label>白背景の除去しきい値：<span id="tv">35</span> <input id="threshold" type="range" min="5" max="100" value="35"></label><small>囲み指定時は囲みの内側を保護し、外側を透明にします。未指定時は外周につながる白背景を透明にします。</small></section><section><strong>③ 透過結果の確認・保存</strong><p><small>結果画面：2本指で拡大・縮小、1本指で移動できます。表示だけの操作なので保存PNGには影響しません。</small></p><div id="previewViewport"><canvas id="preview"></canvas><div id="brushCursor"></div></div><p class="modehint" id="brushHint">移動モード：1本指で移動、2本指で拡大縮小</p><div class="toolrow"><button id="toolPan" class="active secondary">移動</button><button id="toolErase">消しゴム</button><button id="toolRestore">復元ブラシ</button><button id="editUndo" class="secondary">1操作戻す</button><button id="editClear" class="secondary">手直し解除</button></div><label>ブラシの太さ：<span id="brushValue">18</span>px <input id="brushSize" type="range" min="3" max="90" value="18"></label><div id="brushSizePreview" aria-live="off"><div id="brushSizeCircleBox"><div id="brushSizeCircle"></div></div><div id="brushSizePreviewText"><b>ブラシの大きさの見本</b><div>現在 <span id="brushPreviewValue">18</span>px</div>スライダーを動かすと、ここで円の大きさを確認できます。</div></div><small>消しゴム・復元ブラシは1本指でなぞります。2本指で拡大縮小できます。ブラシの円はマウス位置、スマホでは指で触れている位置に表示します。太さは保存画像（370×320px）基準です。</small><div><button id="previewReset" class="secondary">結果表示をリセット</button></div><div style="margin-top:18px;border-top:1px solid #ddd;padding-top:16px"><strong>④ 完成サイズ・配置調整</strong><p class="placement-note">下の市松模様の四角全体が、保存される透明PNG（370×320px）です。外側にグレーの編集領域はありません。1本指で移動、2本指で拡大・縮小できます。</p><div id="saveFrameLabel">⬇ 下の市松模様の四角全体が保存範囲（370 × 320px）</div><div id="placementViewport"><canvas id="placementCanvas" width="370" height="320"></canvas><div id="saveFrame" aria-hidden="true"></div></div><div class="toolrow"><button id="placeFit" class="primary-action">◎ 枠内に収めて中央配置</button><button id="placeCenter" class="secondary">＋ 中央に配置</button></div><details class="danger-menu"><summary>⚙ 配置を初期状態に戻す</summary><button id="placeReset" class="danger">配置をリセット</button></details><p class="placement-note" id="placeStatus">拡大率：100%</p><p id="fitWarning" role="status"></p><small>※ここでの配置変更はPNG保存にも反映されます。枠の外にはみ出た部分は保存時に切れます。</small></div><label>保存時の余白：<span id="marginValue">10</span>px <input id="margin" type="range" min="0" max="35" value="10"></label><div><button id="refresh">プレビュー更新</button><button id="download">この1枚をPNG保存</button><button id="all" class="secondary">8枚を順番に保存</button></div><p><small>出力はLINEスタンプ向け370×320pxの透明PNGです。画像同士が元画像で重なっている場合は完全に分離できません。8枚の連続ダウンロードが制限される場合は1枚ずつ保存してください。</small></p></section></main><script>
+(()=>{
+const $=id=>document.getElementById(id), editor=$('editor'), ec=editor.getContext('2d'), preview=$('preview'), pc=preview.getContext('2d');
+let img=null,idx=0,polys=Array(8).fill(null),points=[],drawing=false,mode='pan'; const viewport=$('viewport');let zoom=1,base=1,tx=0,ty=0;const fingers=new Map();let gesture=null;let gestureUsed=false;let suppressPointUntil=0;
+const pv=$('previewViewport');let pscale=1,px=0,py=0,pbase=1;const pfingers=new Map();let pgesture=null;
+let brushMode='pan',brushSize=18,painting=false,lastBrush=null,paintPointer=null,strokeChanged=false;
+ let spaceHeld=false,activeArea='outline',previewMouse=null,previewPanPointer=null;
+ const placeHistory=Array.from({length:8},()=>[]);let placeDragStart=null;
+const edits=Array(8).fill(null),histories=Array.from({length:8},()=>[]);
+function freshCanvas(){let c=document.createElement('canvas');c.width=370;c.height=320;return c}
+function baseOutput(){return output(idx)}
+function editedOutput(i){let base=output(i),layer=edits[i];if(layer){let g=base.getContext('2d');g.clearRect(0,0,370,320);g.drawImage(layer,0,0)}return base}
+function ensureEdit(){if(!edits[idx]){edits[idx]=baseOutput()}return edits[idx]}
+function historyPush(){let c=ensureEdit(),snapshot=freshCanvas();snapshot.getContext('2d').drawImage(c,0,0);histories[idx].push(snapshot);if(histories[idx].length>20)histories[idx].shift()}
+function updateUndo(){$('editUndo').disabled=histories[idx].length===0;$('editClear').disabled=!edits[idx]}
+function setBrushMode(m){brushMode=m;updateBrushCursor();for(let [id,v] of [['toolPan','pan'],['toolErase','erase'],['toolRestore','restore']])$(''+id).classList.toggle('active',m===v);$('brushHint').textContent=m==='pan'?'移動：1本指で移動、2本指で拡大縮小':(m==='erase'?'消しゴム：1本指で不要部分をなぞる':'復元ブラシ：消した部分を1本指でなぞって戻す')}
+function previewCoords(e){let r=pv.getBoundingClientRect(),sc=pbase*pscale;return{x:(e.clientX-r.left-px)/sc,y:(e.clientY-r.top-py)/sc}}
+function dab(x,y){let c=ensureEdit(),g=c.getContext('2d'),radius=brushSize/2;g.save();g.beginPath();g.arc(x,y,radius,0,Math.PI*2);g.clip();if(brushMode==='erase'){g.clearRect(x-radius-2,y-radius-2,brushSize+4,brushSize+4)}else{let original=baseOutput();g.clearRect(x-radius-2,y-radius-2,brushSize+4,brushSize+4);g.drawImage(original,0,0)}g.restore();strokeChanged=true}
+function paintTo(e){let p=previewCoords(e);if(lastBrush){let d=Math.hypot(p.x-lastBrush.x,p.y-lastBrush.y),n=Math.max(1,Math.ceil(d/Math.max(1,brushSize/5)));for(let j=1;j<=n;j++){let t=j/n;dab(lastBrush.x+(p.x-lastBrush.x)*t,lastBrush.y+(p.y-lastBrush.y)*t)}}else dab(p.x,p.y);lastBrush=p;makePreview();}
+$('toolPan').onclick=()=>setBrushMode('pan');$('toolErase').onclick=()=>setBrushMode('erase');$('toolRestore').onclick=()=>setBrushMode('restore');
+$('brushSize').oninput=e=>{brushSize=Number(e.target.value);$('brushValue').textContent=brushSize;updateBrushSizePreview();updateBrushCursor()};
+ function updateBrushSizePreview(){const circle=$('brushSizeCircle'),value=$('brushPreviewValue');if(!circle||!value)return;const diameter=Math.max(3,Math.min(90,brushSize));circle.style.width=diameter+'px';circle.style.height=diameter+'px';value.textContent=brushSize;}
+function updateBrushCursor(e){
+  if(e && (e.pointerType==='mouse'||e.pointerType==='pen')) previewMouse={x:e.clientX,y:e.clientY,type:'mouse'};
+  if(e && e.pointerType==='touch' && pfingers.size<=1) previewMouse={x:e.clientX,y:e.clientY,type:'touch'};
+  const cursor=$('brushCursor');
+  if(!previewMouse||brushMode==='pan'||spaceHeld||pfingers.size>=2){cursor.style.display='none';return}
+  const r=pv.getBoundingClientRect(),diam=brushSize*pbase*pscale;
+  cursor.style.width=diam+'px';cursor.style.height=diam+'px';
+  cursor.style.left=(previewMouse.x-r.left-diam/2)+'px';
+  cursor.style.top=(previewMouse.y-r.top-diam/2)+'px';
+  cursor.style.borderWidth='2px';
+  cursor.style.boxShadow='0 0 0 1px white,0 0 4px #0009';
+  cursor.style.display='block';
+ }
+
+ pv.addEventListener('pointerenter',e=>{activeArea='brush';updateBrushCursor(e)});pv.addEventListener('pointerleave',()=>{previewMouse=null;updateBrushCursor()});
+$('editUndo').onclick=()=>{let a=histories[idx];if(a.length){edits[idx]=a.pop();makePreview();updateUndo()}};
+$('editClear').onclick=()=>{edits[idx]=null;histories[idx]=[];makePreview();updateUndo()};
+
+function applyPreviewView(){preview.style.width='370px';preview.style.height='320px';preview.style.transform=`translate(${px}px,${py}px) scale(${pbase*pscale})`;updateBrushCursor()}
+function resetPreviewView(){pbase=Math.min(pv.clientWidth/370,pv.clientHeight/320);pscale=1;px=(pv.clientWidth-370*pbase)/2;py=(pv.clientHeight-320*pbase)/2;applyPreviewView()}
+pv.addEventListener('pointerdown',e=>{activeArea='brush';e.preventDefault();pv.setPointerCapture(e.pointerId);pfingers.set(e.pointerId,{x:e.clientX,y:e.clientY});updateBrushCursor(e);if(pfingers.size===1&&brushMode!=='pan'&&!spaceHeld){historyPush();painting=true;paintPointer=e.pointerId;strokeChanged=false;lastBrush=null;paintTo(e)}if(pfingers.size===2){updateBrushCursor();painting=false;lastBrush=null;let a=[...pfingers.values()],r=pv.getBoundingClientRect(),cx=(a[0].x+a[1].x)/2-r.left,cy=(a[0].y+a[1].y)/2-r.top;pgesture={dist:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),scale:pscale,px,py,cx,cy}}});
+pv.addEventListener('pointermove',e=>{updateBrushCursor(e);if(!pfingers.has(e.pointerId))return;e.preventDefault();let old=pfingers.get(e.pointerId);pfingers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pfingers.size===2&&pgesture){let a=[...pfingers.values()],r=pv.getBoundingClientRect(),cx=(a[0].x+a[1].x)/2-r.left,cy=(a[0].y+a[1].y)/2-r.top,d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),next=Math.max(1,Math.min(12,pgesture.scale*d/Math.max(1,pgesture.dist))),ratio=next/pgesture.scale;pscale=next;px=cx-(pgesture.cx-pgesture.px)*ratio;py=cy-(pgesture.cy-pgesture.py)*ratio;applyPreviewView()}else if(pfingers.size===1){if(brushMode==='pan'||spaceHeld){px+=e.clientX-old.x;py+=e.clientY-old.y;applyPreviewView()}else if(painting&&paintPointer===e.pointerId)paintTo(e)}});
+function previewRelease(e){pfingers.delete(e.pointerId);if(e.pointerType==='touch'){previewMouse=null;updateBrushCursor()}else updateBrushCursor(e);if(paintPointer===e.pointerId){painting=false;paintPointer=null;lastBrush=null;updateUndo()}pgesture=null}pv.addEventListener('pointerup',previewRelease);pv.addEventListener('pointercancel',previewRelease);
+$('previewReset').onclick=resetPreviewView;
+const cells=$('cells');
+for(let i=0;i<8;i++){let b=document.createElement('button');b.textContent=String(i+1).padStart(2,'0');b.onclick=()=>{idx=i;drawing=false;points=[];mode="pan";render();updateUndo()};cells.appendChild(b)}
+function rect(i){let col=i%4,row=Math.floor(i/4),x=Math.round(col*img.width/4),y=Math.round(row*img.height/2),right=Math.round((col+1)*img.width/4),bottom=Math.round((row+1)*img.height/2);return{x,y,w:right-x,h:bottom-y}}
+function fitView(){if(!img)return;const w=viewport.clientWidth,h=viewport.clientHeight;base=Math.min(w/img.width,h/img.height);zoom=1;tx=(w-img.width*base)/2;ty=(h-img.height*base)/2;applyView()}
+function applyView(){const z=$('zoomLabel');if(z)z.textContent=Math.round(zoom*100)+'%';editor.style.width=img.width+'px';editor.style.height=img.height+'px';editor.style.transform=`translate(${tx}px,${ty}px) scale(${base*zoom})`}
+function pointAt(x,y){const r=viewport.getBoundingClientRect(),sc=base*zoom;return [Math.max(0,Math.min(img.width,(x-r.left-tx)/sc)),Math.max(0,Math.min(img.height,(y-r.top-ty)/sc))]}
+function updateOutlineMode(){
+ const b=$('polygon'),tag=$('modeBadge');b.classList.remove('is-drawing','is-done');tag.classList.remove('drawing','done');
+ if(drawing&&mode==='draw'){b.classList.add('is-drawing');b.textContent='● 輪郭指定中';tag.classList.add('drawing');tag.textContent='🔴 輪郭指定中：タップで点を追加';}
+ else if(polys[idx]){b.classList.add('is-done');b.textContent='✓ 指定完了（再指定）';tag.classList.add('done');tag.textContent='✓ 輪郭確定済み';}
+ else{b.textContent='輪郭を指定';tag.textContent='✋ 移動モード';}
+ $('panmode').classList.toggle('selected',mode==='pan');b.classList.toggle('selected',mode==='draw'&&drawing);
+}
+function render(){if(!img)return;updateOutlineMode();
+// Entire original is always shown, so polygon coordinates can cross 4x2 boundaries.
+editor.width=img.width;editor.height=img.height;ec.clearRect(0,0,img.width,img.height);ec.drawImage(img,0,0);
+let r=rect(idx);ec.save();ec.strokeStyle='#2367d9';ec.lineWidth=Math.max(2,img.width/450);ec.setLineDash([12,8]);ec.strokeRect(r.x,r.y,r.w,r.h);ec.restore();
+let pts=drawing?points:polys[idx];if(pts&&pts.length){ec.strokeStyle='#e50069';ec.fillStyle='#e50069';ec.lineWidth=Math.max(3,img.width/350);ec.beginPath();pts.forEach((p,i)=>i?ec.lineTo(p[0],p[1]):ec.moveTo(p[0],p[1]));if(!drawing)ec.closePath();ec.stroke();pts.forEach(p=>{ec.beginPath();ec.arc(p[0],p[1],Math.max(5,img.width/240),0,Math.PI*2);ec.fill()})}
+Array.from(cells.children).forEach((b,i)=>b.classList.toggle('active',i===idx));$('finish').disabled=!drawing||points.length<3;$('status').textContent=`画像 ${img.width}×${img.height} ／ スタンプ ${idx+1}/8 ${polys[idx]?'（囲み指定済み）':'（青点線は自動分割の目安）'}`;makePreview()}
+function output(i){let poly=polys[i],r;
+if(poly&&poly.length>=3){let xs=poly.map(p=>p[0]),ys=poly.map(p=>p[1]),pad=Math.max(3,Math.round(img.width/250)),x=Math.max(0,Math.floor(Math.min(...xs))-pad),y=Math.max(0,Math.floor(Math.min(...ys))-pad),right=Math.min(img.width,Math.ceil(Math.max(...xs))+pad),bottom=Math.min(img.height,Math.ceil(Math.max(...ys))+pad);r={x,y,w:Math.max(1,right-x),h:Math.max(1,bottom-y)}}else r=rect(i);
+let c=document.createElement('canvas');c.width=r.w;c.height=r.h;let g=c.getContext('2d',{willReadFrequently:true});g.drawImage(img,r.x,r.y,r.w,r.h,0,0,r.w,r.h);
+if(poly&&poly.length>=3){ // Polygon clipping preserves white text, white outlines, and light character details.
+let mask=document.createElement('canvas');mask.width=r.w;mask.height=r.h;let mg=mask.getContext('2d');mg.fillStyle='#fff';mg.beginPath();poly.forEach((p,k)=>k?mg.lineTo(p[0]-r.x,p[1]-r.y):mg.moveTo(p[0]-r.x,p[1]-r.y));mg.closePath();mg.fill();g.globalCompositeOperation='destination-in';g.drawImage(mask,0,0);g.globalCompositeOperation='source-over';
+}else{ // Auto mode: only remove white connected to the cropped image boundary.
+let d=g.getImageData(0,0,r.w,r.h),a=d.data,w=r.w,h=r.h,seen=new Uint8Array(w*h),queue=new Int32Array(w*h),head=0,tail=0,threshold=Number($('threshold').value);
+function white(p){let q=p*4;return a[q+3]>0&&Math.max(255-a[q],255-a[q+1],255-a[q+2])<=threshold}
+function push(p){if(seen[p]||!white(p))return;seen[p]=1;queue[tail++]=p}
+for(let x=0;x<w;x++){push(x);push((h-1)*w+x)}for(let y=0;y<h;y++){push(y*w);push(y*w+w-1)}
+while(head<tail){let p=queue[head++],x=p%w,y=(p/w)|0;if(x>0)push(p-1);if(x<w-1)push(p+1);if(y>0)push(p-w);if(y<h-1)push(p+w)}
+for(let p=0;p<w*h;p++)if(seen[p])a[p*4+3]=0;g.putImageData(d,0,0)}
+// Fit content inside the official LINE static-sticker canvas without cropping.
+let out=document.createElement('canvas');out.width=370;out.height=320;let og=out.getContext('2d');let margin=Number($('margin').value),scale=Math.min((370-2*margin)/r.w,(320-2*margin)/r.h),dw=r.w*scale,dh=r.h*scale;og.drawImage(c,(370-dw)/2,(320-dh)/2,dw,dh);return out}
+const placement=$('placementViewport'),placeCanvas=$('placementCanvas'),placeCtx=placeCanvas.getContext('2d');
+ viewport.addEventListener('pointerenter',()=>{activeArea='outline'});placement.addEventListener('pointerenter',()=>{activeArea='placement'});
+const saveFrame=$('saveFrame');
+ const placements=Array.from({length:8},()=>({scale:1,x:0,y:0}));let placeFingers=new Map(),placeGesture=null,placeBase=1;
+function finalOutput(i){let source=editedOutput(i),t=placements[i],c=freshCanvas(),g=c.getContext('2d');g.drawImage(source,t.x,t.y,370*t.scale,320*t.scale);return c}
+function paintPlacement(){if(!img)return;let t=placements[idx];placeCanvas.width=370;placeCanvas.height=320;placeCtx.clearRect(0,0,370,320);placeCtx.drawImage(editedOutput(idx),t.x,t.y,370*t.scale,320*t.scale);$('placeStatus').textContent='拡大率：'+Math.round(t.scale*100)+'% ／ 移動：横 '+Math.round(t.x)+'px・縦 '+Math.round(t.y)+'px';placeBase=placement.clientWidth/370;placeCanvas.style.width='100%';placeCanvas.style.height='100%';placeCanvas.style.transform='none';saveFrame.style.display='none';updateFitWarning()}
+function placementPoint(e){let r=placement.getBoundingClientRect();return{x:(e.clientX-r.left)*370/r.width,y:(e.clientY-r.top)*320/r.height}}
+placement.addEventListener('pointerdown',e=>{if(!img)return;activeArea='placement';if(placeFingers.size===0)placeDragStart={...placements[idx]};e.preventDefault();placement.setPointerCapture(e.pointerId);let q=placementPoint(e);placeFingers.set(e.pointerId,q);if(placeFingers.size===2){let a=[...placeFingers.values()],t=placements[idx];placeGesture={distance:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),scale:t.scale,x:t.x,y:t.y,cx:(a[0].x+a[1].x)/2,cy:(a[0].y+a[1].y)/2}}});
+placement.addEventListener('pointermove',e=>{if(!placeFingers.has(e.pointerId)||!img)return;e.preventDefault();let prev=placeFingers.get(e.pointerId),q=placementPoint(e);placeFingers.set(e.pointerId,q);let t=placements[idx];if(placeFingers.size===2&&placeGesture){let a=[...placeFingers.values()],cx=(a[0].x+a[1].x)/2,cy=(a[0].y+a[1].y)/2,d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),next=Math.max(.2,Math.min(5,placeGesture.scale*d/Math.max(1,placeGesture.distance))),ratio=next/placeGesture.scale;t.scale=next;t.x=cx-(placeGesture.cx-placeGesture.x)*ratio;t.y=cy-(placeGesture.cy-placeGesture.y)*ratio}else if(placeFingers.size===1){t.x+=q.x-prev.x;t.y+=q.y-prev.y}paintPlacement()});
+function placeRelease(e){placeFingers.delete(e.pointerId);if(placeFingers.size===0&&placeDragStart){const t=placements[idx],o=placeDragStart;if(t.x!==o.x||t.y!==o.y||t.scale!==o.scale)pushPlaceUndo(o);placeDragStart=null}placeGesture=null}placement.addEventListener('pointerup',placeRelease);placement.addEventListener('pointercancel',placeRelease);
+function pushPlaceUndo(snapshot){let a=placeHistory[idx];a.push({...snapshot});if(a.length>30)a.shift()}
+ $('placeReset').onclick=()=>{if(!confirm('このスタンプの配置を初期状態に戻しますか？'))return;pushPlaceUndo(placements[idx]);placements[idx]={scale:1,x:0,y:0};paintPlacement()};
+function alphaBounds(c){
+ const w=c.width,h=c.height,d=c.getContext('2d',{willReadFrequently:true}).getImageData(0,0,w,h).data;
+ let left=w,top=h,right=-1,bottom=-1;
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  if(d[(y*w+x)*4+3]>8){if(x<left)left=x;if(x>right)right=x;if(y<top)top=y;if(y>bottom)bottom=y}
+ }
+ return right<0?null:{left,top,right: right+1,bottom:bottom+1,width:right-left+1,height:bottom-top+1};
+}
+function updateFitWarning(){
+ if(!img)return;
+ const b=alphaBounds(editedOutput(idx)),el=$('fitWarning');
+ if(!b){el.textContent='画像が透明です。輪郭指定や消しゴムを確認してください。';return}
+ const t=placements[idx],edge=1;
+ const clipped=t.x+b.left*t.scale<edge||t.y+b.top*t.scale<edge||t.x+b.right*t.scale>370-edge||t.y+b.bottom*t.scale>320-edge;
+ const sourceEdge=b.left<=1||b.top<=1||b.right>=369||b.bottom>=319;
+ el.textContent=clipped?'⚠ 文字やキャラクターが保存範囲からはみ出しています。「枠内に収める」を押してください。':sourceEdge?'※ 元の切り抜き画像が端まで達しています。輪郭指定ですでに欠けた部分は、自動調整では復元できません。':'✓ 現在の画像は保存範囲に収まっています。';
+}
+$('placeCenter').onclick=()=>{if(!img)return;const b=alphaBounds(editedOutput(idx));if(!b)return;const t=placements[idx];pushPlaceUndo(t);t.x=(370-(b.left+b.right)*t.scale)/2;t.y=(320-(b.top+b.bottom)*t.scale)/2;paintPlacement()};
+$('placeFit').onclick=()=>{
+ if(!img)return;
+ const b=alphaBounds(editedOutput(idx));if(!b){paintPlacement();return}
+ const margin=Math.max(8,Number($('margin').value));
+ const scale=Math.min((370-2*margin)/b.width,(320-2*margin)/b.height);
+ pushPlaceUndo(placements[idx]);placements[idx]={scale,x:(370-b.width*scale)/2-b.left*scale,y:(320-b.height*scale)/2-b.top*scale};
+ paintPlacement();
+};
+function makePreview(){if(!img)return;let c=editedOutput(idx);preview.width=c.width;preview.height=c.height;pc.clearRect(0,0,c.width,c.height);pc.drawImage(c,0,0);applyPreviewView();paintPlacement()}
+$('file').onchange=e=>{let f=e.target.files[0];if(!f)return;let url=URL.createObjectURL(f),im=new Image();im.onload=()=>{img=im;polys=Array(8).fill(null);for(let j=0;j<8;j++){edits[j]=null;histories[j]=[]}idx=0;drawing=false;points=[];mode="pan";placeHistory.forEach(a=>a.length=0);placements.forEach(t=>{t.scale=1;t.x=0;t.y=0});render();fitView();URL.revokeObjectURL(url)};im.onerror=()=>{$('status').textContent='画像を読み込めませんでした';URL.revokeObjectURL(url)};im.src=url};
+$('polygon').onclick=()=>{if(!img)return;drawing=true;mode='draw';points=[];render();$('modehint').textContent='タップで点を追加・ドラッグで移動・2本指で拡大縮小。'};
+$('panmode').onclick=()=>{mode='pan';updateOutlineMode();$('modehint').textContent='移動モード：1本指で移動・2本指で拡大縮小';};$('home').onclick=()=>{if(confirm('画像の表示倍率と位置をリセットしますか？（輪郭指定は残ります）'))fitView()};
+function zoomEditor(factor){if(!img)return;const cx=viewport.clientWidth/2,cy=viewport.clientHeight/2;const next=Math.max(.5,Math.min(12,zoom*factor)),ratio=next/zoom;tx=cx-(cx-tx)*ratio;ty=cy-(cy-ty)*ratio;zoom=next;applyView()}
+$('zoomIn').onclick=()=>zoomEditor(1.35);
+$('zoomOut').onclick=()=>zoomEditor(1/1.35);
+viewport.addEventListener('pointerdown',e=>{
+ if(!img)return;activeArea='outline';e.preventDefault();viewport.setPointerCapture(e.pointerId);
+ fingers.set(e.pointerId,{x:e.clientX,y:e.clientY,sx:e.clientX,sy:e.clientY});
+ if(fingers.size>=2){gestureUsed=true;suppressPointUntil=Date.now()+350;
+ const a=[...fingers.values()].slice(0,2),r=viewport.getBoundingClientRect();
+ gesture={dist:Math.max(1,Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y)),zoom,tx,ty,
+ cx:(a[0].x+a[1].x)/2-r.left,cy:(a[0].y+a[1].y)/2-r.top};
+ }
+});
+viewport.addEventListener('pointermove',e=>{
+ if(!fingers.has(e.pointerId)||!img)return;e.preventDefault();
+ const old=fingers.get(e.pointerId);
+ fingers.set(e.pointerId,{...old,x:e.clientX,y:e.clientY});
+ if(fingers.size>=2&&gesture){
+  const a=[...fingers.values()].slice(0,2),r=viewport.getBoundingClientRect();
+  const cx=(a[0].x+a[1].x)/2-r.left,cy=(a[0].y+a[1].y)/2-r.top;
+  const d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);
+  const next=Math.max(.5,Math.min(12,gesture.zoom*d/gesture.dist));
+  const ratio=next/gesture.zoom;zoom=next;
+  tx=cx-(gesture.cx-gesture.tx)*ratio;
+  ty=cy-(gesture.cy-gesture.ty)*ratio;
+  applyView();
+ }else if(fingers.size===1&&!gestureUsed){
+  tx+=e.clientX-old.x;ty+=e.clientY-old.y;applyView();
+ }
+});
+function release(e){
+ if(!fingers.has(e.pointerId))return;
+ const f=fingers.get(e.pointerId),single=fingers.size===1;
+ const addPoint=single&&!gestureUsed&&!spaceHeld&&Date.now()>suppressPointUntil&&mode==='draw'&&drawing&&Math.hypot(e.clientX-f.sx,e.clientY-f.sy)<14;
+ fingers.delete(e.pointerId);
+ if(addPoint){points.push(pointAt(e.clientX,e.clientY));render()}
+ if(fingers.size===1&&gestureUsed){suppressPointUntil=Date.now()+350;gesture=null}
+ if(fingers.size===0){gesture=null;gestureUsed=false;suppressPointUntil=Date.now()+200}
+}
+viewport.addEventListener('pointerup',release);
+viewport.addEventListener('pointercancel',e=>{fingers.delete(e.pointerId);gesture=null;gestureUsed=fingers.size>0;suppressPointUntil=Date.now()+350});
+window.addEventListener('resize',()=>{if(img)fitView();resetPreviewView();paintPlacement()});
+$('finish').onclick=()=>{if(points.length<3)return;polys[idx]=points.map(p=>p.slice());drawing=false;points=[];mode="pan";render()};
+$('undo').onclick=()=>{if(drawing){points.pop();render()}};
+ function keyboardUndo(){if(!img)return;if(activeArea==='outline'){if(drawing&&points.length){points.pop();render()}}else if(activeArea==='brush'){let a=histories[idx];if(a.length){edits[idx]=a.pop();makePreview();updateUndo()}}else if(activeArea==='placement'){let a=placeHistory[idx];if(a.length){placements[idx]=a.pop();paintPlacement()}}}
+ function typingTarget(e){const t=e.target;return t&&((t.tagName==='INPUT')||(t.tagName==='TEXTAREA')||t.isContentEditable)}
+ window.addEventListener('keydown',e=>{if(typingTarget(e))return;if(e.code==='Space'&&!e.repeat){spaceHeld=true;updateBrushCursor();e.preventDefault();return}if((e.ctrlKey||e.metaKey)&&!e.altKey&&e.key.toLowerCase()==='z'&&!e.shiftKey){e.preventDefault();keyboardUndo();return}if(e.shiftKey&&!e.ctrlKey&&!e.metaKey&&!e.altKey){if(e.code==='BracketRight'||e.key==='」'){e.preventDefault();zoomEditor(1.35)}else if(e.code==='BracketLeft'||e.key==='「'){e.preventDefault();zoomEditor(1/1.35)}}});
+ window.addEventListener('keyup',e=>{if(e.code==='Space'){spaceHeld=false;updateBrushCursor()}});window.addEventListener('blur',()=>{spaceHeld=false;updateBrushCursor()});
+$('reset').onclick=()=>{if(!confirm('このスタンプの輪郭指定と手直しを解除しますか？'))return;polys[idx]=null;points=[];drawing=false;edits[idx]=null;histories[idx]=[];render();updateUndo()};
+$('threshold').oninput=e=>{$('tv').textContent=e.target.value;edits[idx]=null;histories[idx]=[];makePreview();updateUndo()};$('refresh').onclick=makePreview;$('margin').oninput=e=>{$('marginValue').textContent=e.target.value;edits[idx]=null;histories[idx]=[];makePreview();updateUndo()};
+function save(c,name){c.toBlob(blob=>{if(!blob)return;let u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),30000)},'image/png')}
+function name(i){return 'gudeko_'+String(i+1).padStart(2,'0')+'.png'}
+$('download').onclick=()=>{if(img)save(finalOutput(idx),name(idx))};$('all').onclick=()=>{if(!img)return;for(let i=0;i<8;i++)setTimeout(()=>save(finalOutput(i),name(i)),i*450)};
+resetPreviewView();updateUndo();updateBrushSizePreview();
+})();
+</script></body></html>
