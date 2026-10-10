@@ -1,0 +1,1014 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ぐでこ スタンプ切り抜き STEP 17.0</title><style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f6fb;color:#222;margin:0;padding:16px}main{max-width:780px;margin:auto}section{background:white;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 2px 9px #0001}h1{font-size:23px}button,.btn{background:#2367d9;color:white;border:0;border-radius:9px;padding:12px;font-size:15px;margin:4px;cursor:pointer}button.secondary{background:#555}button:disabled{opacity:.4}input[type=file]{max-width:100%;font-size:15px}#file::file-selector-button{background:linear-gradient(125deg,#3669e8,#8452db);color:white;border:0;border-radius:10px;padding:12px 17px;font-size:15px;font-weight:700;margin-right:10px;box-shadow:0 3px 9px #4968bc40;cursor:pointer}#file::-webkit-file-upload-button{background:linear-gradient(125deg,#3669e8,#8452db);color:white;border:0;border-radius:10px;padding:12px 17px;font-size:15px;font-weight:700;margin-right:10px;cursor:pointer}canvas{display:block;max-width:100%;height:auto;touch-action:none;background:repeating-conic-gradient(#ddd 0 25%,white 0 50%) 0/20px 20px;border:1px solid #ccc}#editor{max-width:none;touch-action:none} #previewViewport{overflow:hidden;width:100%;height:360px;position:relative;border:1px solid #ccc;touch-action:none;background:repeating-conic-gradient(#ddd 0 25%,white 0 50%) 0/20px 20px} #previewViewport canvas{position:absolute;left:0;top:0;max-width:none;border:0;background:transparent;transform-origin:0 0} .editor-viewport{overflow:hidden;width:100%;height: min(65vh,520px);border:1px solid #ccc;position:relative;background:#eee;touch-action:none} .editor-viewport canvas{position:absolute;left:0;top:0;border:0;transform-origin:0 0} .modehint{font-size:13px;color:#444} label{display:block;margin:12px 0}input[type=range]{width:70%}small{color:#555}.chips{display:flex;flex-wrap:wrap}.chips button.active{background:#e75a80}.status{font-weight:600;color:#225caa}a{color:#2367d9}.toolrow{display:flex;flex-wrap:wrap;gap:5px;align-items:center}.toolrow button.active{background:#e75a80}.toolrow button{font-size:14px;padding:10px}.toolrow button:disabled{opacity:.35}#previewViewport{height:400px}#brushCursor{position:absolute;pointer-events:none;border:2px solid #e50069;border-radius:50%;display:none;box-sizing:border-box;z-index:5} #placementViewport{height:360px;overflow:hidden;position:relative;border:1px solid #bbb;touch-action:none;background:repeating-conic-gradient(#ddd 0 25%,#fff 0 50%) 0/20px 20px}#placementCanvas{position:absolute;left:0;top:0;max-width:none;border:0;background:transparent;touch-action:none} .placement-note{color:#555;font-size:13px}#polygon.is-drawing{background:#e74676;color:white;box-shadow:0 0 0 3px #ffd4df inset}#polygon.is-done{background:#27855b;color:white}#modeBadge{display:inline-block;margin:8px 0;padding:7px 12px;border-radius:8px;font-size:14px;font-weight:700;background:#e8edf5;color:#344052}#modeBadge.drawing{background:#ffe1ea;color:#b41549}#modeBadge.done{background:#dcf5e6;color:#17613b}#saveFrame{display:none}#placementViewport{isolation:isolate;background:repeating-conic-gradient(#dedede 0 25%,#fff 0 50%) 0/20px 20px;width:100%;height:auto;aspect-ratio:370/320;max-height:none;padding:0;box-sizing:border-box;border:2px solid #64748b;border-radius:4px}#placementCanvas{z-index:2;background:transparent;width:100%;height:100%;transform:none}#saveFrameLabel{font-size:14px;font-weight:700;color:#334155;margin:10px 0 5px}#fitWarning{font-size:13px;color:#a33b22;margin:8px 0;line-height:1.5}  .editor-tools{display:grid;gap:10px;margin:12px 0}.mode-controls,.edit-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mode-controls button,.edit-actions button{margin:0;min-height:52px;font-size:16px;font-weight:700}.mode-btn{background:#e9eef7;color:#334155;border:2px solid #cbd5e1}.mode-btn.selected{background:#2468dc;color:#fff;border-color:#2468dc}.mode-btn.is-drawing,.mode-btn.is-drawing.selected{background:#df3569;color:#fff;border-color:#df3569}.mode-btn.is-done{background:#27855b;color:#fff;border-color:#27855b}.zoom-controls{display:flex;align-items:center;justify-content:space-between;gap:5px}.zoom-controls button{flex:1;margin:0;background:#4b5563}.zoom-controls span{min-width:52px;text-align:center;font-weight:700}.edit-actions #finish{background:#218657}.edit-actions #undo{background:#e7edf5;color:#334155}.danger-menu{border:1px solid #dbe1e9;border-radius:10px;padding:10px 12px;margin-top:6px;background:#f8fafc}.danger-menu summary{font-size:13px;color:#526174;cursor:pointer}.danger{background:#b83a49}.primary-action{background:#2468dc;font-weight:700}#placementViewport{border:2px solid #64748b!important}#placementCanvas{inset:0}#saveFrameLabel{color:#225caa} #brushSizePreview{display:flex;align-items:center;gap:12px;background:#f3f6fb;border:1px solid #d9e2f0;border-radius:12px;padding:10px 12px;margin:8px 0}#brushSizeCircleBox{width:106px;height:106px;flex:0 0 106px;border-radius:10px;background:repeating-conic-gradient(#e2e2e2 0 25%,#fff 0 50%) 0/16px 16px;display:grid;place-items:center}#brushSizeCircle{border:2px solid #e50069;border-radius:50%;box-sizing:border-box;background:#e5006920;width:18px;height:18px;box-shadow:0 0 0 1px #fff}#brushSizePreviewText{font-size:13px;line-height:1.6;color:#344052} #zoomIn,#zoomOut,#centerSelected{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent} #brushFloatingSample{position:absolute;top:12px;right:12px;z-index:12;pointer-events:auto;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;display:none;align-items:center;gap:9px;padding:7px 10px;border-radius:12px;background:rgba(255,255,255,.78);box-shadow:0 2px 10px #0002;border:1px solid #cbd5e1;color:#243246;font-weight:700;font-size:13px}#brushFloatingCircleBox{width:54px;height:54px;display:grid;place-items:center;background:repeating-conic-gradient(#ddd 0 25%,white 0 50%) 0/12px 12px;border-radius:8px}#brushFloatingCircle{width:18px;height:18px;box-sizing:border-box;border:2px solid #e50069;border-radius:50%;background:#e5006920}#brushFloatingValue{min-width:42px;text-align:center}.editor-cells{margin:10px 0;gap:5px}.editor-cells button{min-width:44px;padding:10px 8px}.placement-cells{margin:10px 0 12px}.placement-cells button{min-width:48px}.format-picker{margin:14px 0;padding:12px;border:1px solid #d8e1ef;border-radius:12px;background:#f7faff}.format-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.format-buttons button{background:#e9eef7;color:#334155;border:2px solid #cbd5e1;margin:0;line-height:1.5;font-weight:700}.format-buttons button.selected{background:#2468dc;color:white;border-color:#2468dc}.format-buttons button small{color:inherit}  .library-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.library-slot{padding:5px 2px;margin:0;background:#f0f3f9;color:#26374b;border:2px solid #d6deea;border-radius:9px;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px}.library-slot img{width:100%;height:65px;object-fit:contain;background:repeating-conic-gradient(#ddd 0 25%,white 0 50%) 0/12px 12px}.library-slot.dragging{opacity:.45}.library-slot.touch-source{outline:3px solid #8452db;outline-offset:2px}.library-slot.touch-target{outline:3px dashed #8452db;outline-offset:2px;background:#e9e2ff}.library-slot.drag-target{outline:3px dashed #7b55d9;outline-offset:2px;background:#e9e2ff}.library-slot[draggable=true]{cursor:grab}.library-slot.selected{border-color:#e75a80;background:#ffeaf1}.library-slot.filled{border-color:#7ab49b}.library-slot .empty{height:65px;display:grid;place-items:center;color:#8491a4;font-size:23px}.library-actions{display:flex;flex-wrap:wrap;gap:5px}.library-actions button{flex:1;min-width:130px}.library-help{font-size:13px;color:#536174;line-height:1.6} .library-slot.spare{background:#edf0f4;border-color:#c9d1dc}.library-slot.spare.filled{border-color:#aab6c7}.registration-count{margin:12px 0;padding:12px;border:1px solid #cad8ef;border-radius:12px;background:#f6f9ff}.registration-count select{width:100%;font-size:16px;padding:10px;margin:7px 0;border:1px solid #9eafc8;border-radius:8px;background:#fff}.registration-count small{display:block;line-height:1.6}.library-heading-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:10px 0}.library-heading-row p{margin:0;flex:1 1 220px}.library-heading-row #librarySwap{margin:0;padding:9px 12px;font-size:13px;flex:0 1 auto;max-width:100%} .project-buttons{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}.project-buttons button,.project-open{margin:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:13px 8px;border-radius:10px;min-height:44px;box-sizing:border-box;font-size:14px;font-weight:700;cursor:pointer}.project-open{background:#e8edf7;color:#293d59;border:2px solid #cbd5e1}.project-buttons button:disabled{opacity:.5}#projectStatus{padding:9px 10px;border-radius:8px;background:#f3f6fb} .library-multi-panel{border:1px solid #cbd5e1;border-radius:12px;padding:12px;background:#f8fafc;margin:12px 0}.library-multi-panel .toolrow button{margin:0;flex:1;min-width:115px}.library-slot.multi-picked{outline:3px solid #2563eb;outline-offset:-3px;background:#e6f0ff}.library-slot.multi-picked.spare{background:#dbe8f8}.library-slot.multi-picked .multi-mark{position:absolute;top:2px;right:2px;background:#2563eb;color:white;border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-weight:700}.library-slot{position:relative}.library-multi-panel button:disabled{opacity:.4}  .library-heading-buttons{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:6px}.library-heading-row .library-heading-buttons button{margin:0;padding:9px 10px;font-size:13px;max-width:100%}.library-heading-row #libraryMultiToggle{background:#506480}.library-heading-row #libraryMultiToggle.is-on{background:#2563eb}.library-slot.spare,.library-slot.spare.filled{background:#e9ebef;border-color:#b9c0cb;color:#58616e}.library-slot.spare.selected{outline:2px solid #e75a80;outline-offset:-2px;border-color:#b9c0cb}.library-slot.spare img{opacity:.68}.library-slot:not(.spare).filled{background:#edf8f2;border-color:#7ab49b}.library-slot:not(.spare):not(.filled){background:#f5f8ff;border-color:#b4c6e7}.library-slot:not(.spare).selected{background:#ffeaf1;border-color:#e75a80}.library-slot.multi-picked,.library-slot.spare.multi-picked{outline:3px solid #2563eb;outline-offset:-3px}@media(max-width:600px){.library-heading-row{align-items:flex-start}.library-heading-row p{flex:1 1 100%}.library-heading-buttons{width:100%;justify-content:flex-start}.library-heading-row .library-heading-buttons button{flex:1 1 45%;font-size:12px;padding:10px 5px}}
+/* STEP 13: first-view source upload and compact project controls */
+#sourceSection{margin-top:10px}#sourceSection>strong{display:block;font-size:18px;margin-bottom:10px}.source-upload-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}.source-upload-button{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 20px;border-radius:11px;color:white;background:linear-gradient(125deg,#3669e8,#8452db);font-weight:700;box-shadow:0 3px 9px #4968bc40;cursor:pointer;margin:0}.source-upload-button:active{filter:brightness(.92)}.source-file-count{font-size:14px;color:#526174;font-weight:600}.source-file-count.loaded{color:#187249}.visually-hidden-file{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip-path:inset(50%)}.source-upload-row:focus-within .source-upload-button{outline:3px solid #9cc0ff;outline-offset:2px}.source-details{margin:5px 0 12px}.project-more{border-top:1px solid #e1e6ee;padding-top:10px;margin-top:9px}.project-more summary{cursor:pointer;color:#4c607b;font-size:13px;font-weight:600}.project-more[open] summary{margin-bottom:10px}#projectSection{padding:14px 16px}#projectSection>strong{font-size:16px}#projectSection .project-buttons{margin:8px 0}#projectSection #projectStatus{margin:8px 0 2px;font-size:13px}#projectSection .project-buttons button,#projectSection .project-open{min-height:46px;padding:9px 7px;font-size:13px}@media(max-width:390px){.source-upload-button{padding:0 14px}.source-file-count{font-size:13px}}
+/* STEP 13: source deletion and conditional project controls */
+.source-item{display:flex;align-items:stretch;gap:5px;max-width:100%;margin:4px 0}.source-item .source-choice{flex:1;min-width:0;overflow-wrap:anywhere;text-align:left;margin:0}.source-remove{flex:0 0 42px;margin:0!important;background:#fff0f1!important;color:#a72c3d!important;border:1px solid #f0aab3!important;font-size:21px!important;padding:6px!important}.source-remove:focus-visible{outline:3px solid #e87a8b}.compact-project{display:none;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:10px;padding:9px 10px;border:1px solid #d8e1ef;border-radius:10px;background:#f7faff}.compact-project button{margin:0;font-size:13px;padding:9px 11px}.compact-project small{flex:1 1 100%;font-size:12px}.compact-project details{width:100%;font-size:13px}.compact-project summary{cursor:pointer;color:#4c607b}.compact-project .project-open{display:inline-flex;min-height:38px;padding:7px 10px;margin-top:8px}.compact-project .project-open input{display:none}#projectSection.has-sources{display:none}#compactProject.has-sources{display:flex}
+
+/* STEP 13: LINE main and tab artwork */
+.asset-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.asset-tabs button{margin:0;background:#e9eef7;color:#334155;border:2px solid #cbd5e1}.asset-tabs button.active{background:#2468dc;color:white;border-color:#2468dc}.asset-stage{display:flex;justify-content:center;align-items:center;padding:15px;min-height:255px;background:#f3f6fb;border-radius:12px}.asset-stage canvas{width:min(100%,270px);height:auto;touch-action:none;cursor:grab;border:2px solid #8794a8;border-radius:4px}.asset-stage canvas:active{cursor:grabbing}.asset-control{display:flex;align-items:center;gap:8px}.asset-control input{flex:1;min-width:0}.asset-control label{margin:0;min-width:64px}.asset-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.asset-actions button{margin:0}.asset-help{font-size:13px;color:#526174;line-height:1.6}
+#previewViewport.picker-active{cursor:crosshair!important}#pickerCursor{position:absolute;pointer-events:none;z-index:15;display:none;transform:translate(8px,-24px);filter:drop-shadow(0 1px 1px white) drop-shadow(0 0 2px white)}#pickerCursor svg{display:block;width:27px;height:27px}#pickerFeedback{position:absolute;pointer-events:none;z-index:16;width:22px;height:22px;border:3px solid var(--picked,#333);box-shadow:0 0 0 2px white,0 2px 6px #0005;border-radius:50%;transform:translate(-50%,-50%) scale(.35);animation:picker-pop .42s ease-out forwards}@keyframes picker-pop{0%{opacity:1;transform:translate(-50%,-50%) scale(.35)}65%{opacity:1;transform:translate(-50%,-50%) scale(1.55)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.85)}}
+/* STEP 17.0: visual-only transparency inspection */
+#previewViewport,#placementViewport{--inspection-bg:repeating-conic-gradient(#ddd 0 25%,#fff 0 50%) 0/20px 20px;background:var(--inspection-bg)!important}
+#previewViewport.inspect-edges #preview{outline:2px dashed #ef476f;outline-offset:-2px}
+#placementViewport.inspect-edges{outline:3px dashed #ef476f;outline-offset:2px}
+.inspection-panel{border:1px solid #cbd5e1;border-radius:12px;background:#f7faff;padding:12px;margin:12px 0}
+.inspection-panel .toolrow button{background:#e7edf5;color:#344052;border:2px solid transparent;margin:2px;padding:9px 12px}
+.inspection-panel .toolrow button.selected{background:#2468dc;color:white;border-color:#164ca7}
+.inspection-panel label{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:14px}
+.inspection-panel input[type=checkbox]{width:18px;height:18px}
+</style></head><body><main><h1>✂️ ぐでこ LINE画像切り抜き（STEP 17.0）</h1><p>iPhone・Windows・MacBook対応。画像は端末内で処理し、サーバーには送信しません。</p><section id="sourceSection"><strong>① 元画像をまとめて読み込む（最大7枚）</strong><div class="source-upload-row"><label for="file" class="source-upload-button">ファイルを選択</label><span id="sourceFileCount" class="source-file-count" role="status" aria-live="polite">画像は未読み込み</span><input id="file" class="visually-hidden-file" type="file" accept="image/*" multiple></div><div id="compactProject" class="compact-project" aria-label="編集中の作業を保存"><strong>💾 作業を保存</strong><button id="compactProjectSave" type="button" class="primary-action">⬇ 保存する</button><small id="compactProjectStatus">編集内容は自動保存されません。保存後はダウンロード先を確認してください。</small><details><summary>保存データから開き直す</summary><label class="project-open" for="projectOpen">📂 続きから開く</label><small>現在の作業を保存ファイルの内容に置き換えます。</small></details></div><div class="source-details"><small>8個セット・単体・2〜7個の画像を混在できます。画像ごとに分割方法を選んでください。</small></div><div id="sourceManager" style="margin:12px 0;padding:12px;border:1px solid #d8e1ef;border-radius:12px;background:#f7faff"><strong>読み込んだ元画像</strong><div id="sourceButtons" class="chips" style="margin:8px 0"></div><label>選択中の元画像の並び方 <select id="sourceLayout"><option value="4x2">4列 × 2行</option><option value="2x4">2列 × 4行（8個）</option><option value="1">分割なし（1個）</option><option value="custom">自由に個数を指定（2〜7個）</option></select></label><label id="sourceCountRow" style="display:none">この画像のイラスト数 <select id="sourceCount"><option value="2">2個</option><option value="3">3個</option><option value="4">4個</option><option value="5">5個</option><option value="6">6個</option><option value="7">7個</option></select></label><small>自由指定では、画像内のイラスト数に合わせて青い範囲を個別に動かせます。最初の枠は仮配置です。</small><small id="sourceInfo">画像を読み込むと切り替えられます。元画像を切り替えても各画像の編集内容を保持します（保存ファイルから再開できます）。</small></div><div class="format-picker"><strong>保存する画像の種類</strong><div class="format-buttons"><button id="formatSticker" class="selected" type="button">LINEスタンプ<br><small>370 × 320px</small></button><button id="formatEmoji" type="button">LINE絵文字<br><small>180 × 180px</small></button></div><small id="formatNote">現在：LINEスタンプ（370 × 320px）</small><div class="registration-count"><label for="registrationCount" style="margin:0"><strong>LINEに登録する個数</strong></label><select id="registrationCount" aria-label="LINEに登録する個数"><option value="40">40個</option></select><small id="registrationCountHelp">スタンプは8・16・24・32・40個から選択できます。登録枚数を減らしても画像は消えず、残りは予備になります。</small></div></div><p id="status" class="status">画像を選択してください</p><div class="chips" id="cells"></div></section><section id="projectSection"><strong>💾 作業データの保存・再開</strong><div class="project-buttons"><button id="projectSave" class="primary-action" type="button">⬇ プロジェクトを保存</button><label class="project-open" for="projectOpen">📂 続きから開く<input id="projectOpen" type="file" accept=".json,application/json" hidden></label></div><p id="projectStatus" class="library-help" role="status">未保存の作業は、ページを閉じると消えます。</p><details class="project-more"><summary>保存についての詳しい説明・チェック情報</summary><p class="library-help">元画像・切り抜き・透過の手直し・配置・登録済み56枠と並び順を、1つのプロジェクトファイルに保存します。次回はこのファイルを読み込んで続きから編集できます。</p><p id="projectDiagnostics" class="library-help" style="background:#f6f9ff;padding:9px;border-radius:8px">保存前チェック：元画像・登録画像の件数を確認できます。</p><small>保存のたびに日時付きの別ファイルを作ります。前回のバックアップは上書きしません。保存形式：.json（画像を含むためファイルサイズが大きくなります）。端末の「ファイル」等に保管してください。自動保存・クラウド同期はありません。</small></details></section><section><strong>② スタンプを選んで輪郭を調整</strong><p><small>「輪郭を指定」では、タップで点を追加、ドラッグで画面移動できます。PCではSpace＋ドラッグで移動、ホイールで拡大縮小できます。残したいスタンプの周囲をタップして囲み、「囲みを確定」を押してください。隣の枠にはみ出す文字も囲めます。</small></p><div class="chips editor-cells" id="editorCellsTop" aria-label="輪郭調整の画像切り替え（上）"></div><div class="editor-viewport" id="viewport"><canvas id="editor"></canvas></div><div id="modeBadge">🔵 青い範囲を調整中</div><div class="chips editor-cells" id="editorCellsBottom" aria-label="輪郭調整の画像切り替え（下）"></div><p class="modehint" id="modehint">白い丸をドラッグして青い範囲を調整。四角の内側で範囲を移動できます。</p><div class="editor-tools"><div class="mode-controls"><button id="boundsMode" class="mode-btn" style="grid-column:1/-1">▣ 青い点線の範囲を調整</button><button id="panmode" class="mode-btn">✋ 移動</button><button id="polygon" class="mode-btn">✏️ 輪郭指定</button></div><p id="boundsHelp" class="modehint" style="display:block;margin:0;background:#e9f8ff;padding:10px;border-radius:8px">青い四角の白い丸をドラッグして範囲を広げたり縮めたりできます。青い範囲が実際の切り抜き範囲になります。四角の内側をドラッグすると範囲全体が移動します。2本指で拡大縮小できます。</p><div class="zoom-controls"><button id="zoomOut" class="secondary">－ 縮小</button><span id="zoomLabel">100%</span><button id="zoomIn" class="secondary">＋ 拡大</button></div><button id="centerSelected" class="secondary" style="width:100%;margin:0;background:#167d80;font-weight:700">⊙ 選択スタンプを中央に表示（倍率は維持）</button><div class="edit-actions"><button id="undo" class="secondary">↶ 1点戻す</button><button id="finish" disabled>✓ 囲みを確定</button></div><details class="danger-menu"><summary>⚙ その他の操作（リセット・囲み解除）</summary><div class="toolrow"><button id="boundsReset" class="secondary">青い範囲を初期化</button><button id="home" class="secondary">表示をリセット</button><button id="reset" class="danger">囲みを解除</button></div><small>確認してから実行します。</small></details></div><p class="modehint">PCショートカット：Ctrl / ⌘ + Z＝戻す、Shift + ↑＝拡大、Shift + ↓＝縮小、Space + 左右ドラッグ＝右へ拡大・左へ縮小、Shift + C＝選択スタンプを中央に表示</p><label>白背景の除去しきい値：<span id="tv">35</span> <input id="threshold" type="range" min="5" max="100" value="35"></label><div class="format-picker" id="backgroundPanel"><strong>背景除去（STEP 17.0）</strong><label>この元画像の背景モード<select id="backgroundMode" style="width:100%;font-size:16px;padding:10px;margin-top:6px;border:1px solid #9eafc8;border-radius:8px"><option value="auto">自動判別（おすすめ）</option><option value="transparent">透過済み・除去しない</option><option value="white">白背景</option><option value="checker">市松模様（グレー・白）</option><option value="solid">単色背景</option></select></label><p id="backgroundDetected" class="modehint" role="status">元画像を読み込むと判別します。</p><small>背景モードは元画像ごとに保持され、プロジェクトにも保存されます。JPEGの文字・毛色と背景が重なった箇所は完全に復元できない場合があります。結果を拡大して確認してください。</small></div></section><section><strong>③ 透過結果の確認・保存</strong><p><small>結果画面：2本指で拡大・縮小、1本指で移動できます。表示だけの操作なので保存PNGには影響しません。</small></p><div class="inspection-panel" id="inspectionPanel"><strong>🔎 保存前チェック（表示のみ）</strong><p class="modehint">背景色を変えると、白い袋文字・黒い輪郭・消し残しを見つけやすくなります。保存PNGの透明部分や画像データは変わりません。</p><div class="toolrow" role="group" aria-label="確認用の背景色"><button type="button" class="selected" data-inspect-bg="checker">▦ チェック柄</button><button type="button" data-inspect-bg="white">□ 白</button><button type="button" data-inspect-bg="black">■ 黒</button></div><label><input id="inspectEdges" type="checkbox"> 保存範囲の境界を表示する</label><p id="inspectStatus" class="modehint" role="status">チェック柄で確認中。細かな点は拡大して確認してください。</p></div><div id="previewViewport"><div id="pickerCursor" aria-hidden="true"><svg viewBox="0 0 24 24" fill="white" stroke="#222" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m2 22 5-5m7-7 5-5a2.12 2.12 0 0 0-3-3l-5 5m3 3-7 7-3 1 1-3 7-7m2 2 3 3"/></svg></div><canvas id="preview"></canvas><div id="brushCursor"></div><div id="brushFloatingSample"><div id="brushFloatingCircleBox"><div id="brushFloatingCircle"></div></div><div id="brushFloatingValue">18px</div><span style="font-size:10px;color:#64748b">↕ 移動</span></div></div><p class="modehint" id="brushHint">移動モード：1本指で移動、2本指で拡大縮小</p><p class="modehint">PCショートカット：D＝背景除去の候補を確定、E＝消しゴム、B＝復元ブラシ、I＝スポイト、C＝カラーブラシ、V＝移動、] または + ＝ブラシを太く、[ または - ＝ブラシを細く</p><div class="toolrow"><button id="toolPan" class="active secondary">移動</button><button id="toolTap">☝ タップで背景除去</button><button id="toolLasso">✏️ 囲んで背景除去</button><button id="toolSmart">🧹 背景だけ消す</button><button id="toolErase">消しゴム</button><button id="toolRestore">復元ブラシ</button><button id="toolColor">🎨 カラーブラシ</button><button id="toolPicker">💧 スポイト</button><button id="editUndo" class="secondary">1操作戻す</button><button id="editClear" class="secondary">全てリセット</button></div><div id="colorRepairPanel" style="display:none;border:1px solid #cbd5e1;background:#f7faff;border-radius:12px;padding:12px;margin:10px 0"><strong>🎨 画像の色を補修</strong><p style="font-size:13px;margin:7px 0">スポイトで画像をクリック・タップすると色を取得。カラーブラシで透明部分にも既存の色の上にも描けます。</p><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><input id="repairColor" type="color" value="#6b4032" aria-label="ブラシ色" style="width:56px;height:42px"><label style="margin:0">カラーコード <input id="repairHex" type="text" value="#6B4032" maxlength="7" inputmode="text" style="width:105px;padding:9px;font-size:16px" aria-label="HEXカラーコード"></label></div><p id="repairStatus" role="status" style="font-size:13px;color:#42526a;margin:8px 0 0">ブラシは不透明・丸型です。［］キーで太さを変更できます。</p></div><div id="lassoPanel" style="display:none;border:1px solid #f7b4cd;background:#fff5f9;border-radius:12px;padding:12px;margin:10px 0"><b>囲んで背景除去（STEP 17.0）</b><p class="modehint">残った点々を指でぐるっと囲むと、範囲内のグレー系の背景候補をまとめてピンクで表示します。必ず確認してから確定してください。PCでは D キーで候補を除去できます。</p><label>背景の判定：<span id="lassoToleranceValue">45</span><input id="lassoTolerance" type="range" min="15" max="90" value="45"></label><div id="lassoStatus" class="modehint" role="status">背景の周りを指で囲んでください。</div><div class="toolrow"><button id="lassoApply" disabled>候補をまとめて除去</button><button id="lassoCancel" class="secondary" disabled>キャンセル</button></div></div><div id="tapPanel" style="display:none;border:1px solid #f7b4cd;background:#fff5f9;border-radius:12px;padding:12px;margin:10px 0"><b>タップで背景除去（STEP 17.0）</b><p class="modehint">残った市松模様をタップすると削除候補をピンク色で表示します。確認後に「この範囲を除去」を押してください。文字やキャラクターが選ばれた場合はキャンセルしてください。PCでは D キーで候補を除去できます。</p><label>検出の強さ：<span id="tapToleranceValue">28</span> <input id="tapTolerance" type="range" min="8" max="75" value="28"></label><div id="tapStatus" class="modehint" role="status">画像の背景をタップしてください。</div><div class="toolrow"><button id="tapApply" disabled>この範囲を除去</button><button id="tapCancel" class="secondary" disabled>キャンセル</button></div></div><label>ブラシの太さ：<span id="brushValue">18</span>px <input id="brushSize" type="range" min="1" max="90" step="1" value="18"></label><div id="brushSizePreview" aria-live="off"><div id="brushSizeCircleBox"><div id="brushSizeCircle"></div></div><div id="brushSizePreviewText"><b>ブラシの大きさの見本</b><div>現在 <span id="brushPreviewValue">18</span>px</div>スライダーを動かすと、ここで円の大きさを確認できます。</div></div><small>消しゴム・復元ブラシ・カラーブラシは1本指でなぞります。ブラシサイズは最小1px、[ / ] キーで1pxずつ変更できます。2本指で拡大縮小できます。ブラシの円はマウス位置、スマホでは指で触れている位置に表示します。太さは保存画像のピクセル基準です。</small><div class="zoom-controls" style="margin:10px 0"><button id="previewZoomOut" class="secondary">－ 縮小</button><span id="previewZoomLabel">100%</span><button id="previewZoomIn" class="secondary">＋ 拡大</button></div><div><button id="previewReset" class="secondary">結果表示をリセット</button></div><small>PC：画像の上でマウスホイール＝カーソル位置を中心に拡大縮小、Space＋ドラッグ＝画像移動。スマホ：2本指で拡大縮小。</small><div style="margin-top:18px;border-top:1px solid #ddd;padding-top:16px"><strong>④ 完成サイズ・配置調整</strong><p class="placement-note">下の市松模様の四角全体が、保存される透明PNGです。外側にグレーの編集領域はありません。1本指で移動、2本指で拡大・縮小できます。</p><div id="saveFrameLabel">⬇ 下の市松模様の四角全体が保存範囲（<span id="frameDimensions">370 × 320px</span>）</div><div id="placementViewport"><canvas id="placementCanvas" width="370" height="320"></canvas><div id="saveFrame" aria-hidden="true"></div></div><div class="chips placement-cells" id="placementCells" aria-label="完成画像の番号切り替え"></div><div class="toolrow"><button id="placeFit" class="primary-action">◎ 枠内に収めて中央配置</button><button id="placeCenter" class="secondary">＋ 中央に配置</button></div><details class="danger-menu"><summary>⚙ 配置を初期状態に戻す</summary><button id="placeReset" class="danger">配置をリセット</button></details><p class="placement-note" id="placeStatus">拡大率：100%</p><p id="fitWarning" role="status"></p><small>※ここでの配置変更はPNG保存にも反映されます。枠の外にはみ出た部分は保存時に切れます。</small></div><label>保存時の余白：<span id="marginValue">10</span>px <input id="margin" type="range" min="0" max="35" value="10"></label><div><button id="refresh">プレビュー更新</button><button id="download">この1枚をPNG保存</button><button id="all" class="secondary">8枚を順番に保存</button></div><p><small>出力は選択した種類のサイズの透明PNGです。画像同士が元画像で重なっている場合は完全に分離できません。8枚の連続ダウンロードが制限される場合は1枚ずつ保存してください。</small></p></section><section id="librarySection"><strong>⑤ 完成画像・予備画像を管理（STEP 17.0）</strong><p class="library-help">登録個数に応じて提出候補と予備候補を自動で分けます。すべて同じ一覧で確認・入れ替えできます。番号を押して登録先を選択してください。</p><p class="library-help">PCでは登録済みの画像をドラッグして別の番号へドロップすると入れ替えられます。スマホでは画像を長押しして移動先へドラッグできます。「並べ替え」ボタンも引き続き使えます。</p><div class="batch-panel" style="border:1px solid #b9ccef;border-radius:12px;background:#f4f8ff;padding:12px;margin:12px 0"><strong id="batchHeading">現在の8枚をまとめて登録</strong><label for="batchGroup">登録開始番号（01〜56）</label><select id="batchGroup" style="width:100%;font-size:16px;padding:10px;border:1px solid #aabbd6;border-radius:8px;background:white"></select><button id="libraryBatch" class="primary-action" style="width:100%;margin:10px 0 4px">現在の画像をまとめて登録</button><small>切り抜き・透過修正・配置調整済みの画像を、指定した開始番号から連続して登録します。すでに登録済みの枠がある場合は上書きを確認します。</small></div><p id="libraryCount" class="status">登録用：0 / 40枚 ／ 予備：0 / 16枚</p><div class="library-heading-row"><p class="library-help"><b id="librarySubmitRange">登録用 01〜40</b>（登録用）／ <b id="librarySpareRange">予備 41〜56</b>（グレー）</p><div class="library-heading-buttons"><button id="librarySwap" class="secondary" type="button">並べ替え：移動元を選択</button><button id="libraryMultiToggle" type="button" class="secondary">☑ 複数選択モード：OFF</button></div></div><div id="libraryGrid" class="library-grid" aria-label="完成画像40枠と予備画像16枠の管理"></div><p id="librarySelected" class="library-help">選択中：01（未登録）</p><div class="library-multi-panel"><div class="toolrow"><span id="libraryMultiCount" class="library-help">通常は1枚ずつ操作します。</span></div><div id="libraryMultiTools" style="display:none"><p class="library-help">番号をタップして複数選択します。登録済みの枠だけを選べます。複数選択中はドラッグ並べ替えを一時停止します。</p><div class="toolrow"><button id="libraryMultiAll" type="button" class="secondary">登録済みをすべて選択</button><button id="libraryMultiClear" type="button" class="secondary">選択解除</button></div><div class="toolrow" style="margin-top:8px"><button id="libraryMultiSave" type="button" class="primary-action">選択画像をまとめてPNG保存</button><button id="libraryMultiDelete" type="button" class="danger">選択画像をまとめて削除</button></div><small>PNG保存は複数ファイルの連続ダウンロードです。Safari等では複数ダウンロードの許可が必要になる場合があります。</small></div></div><div class="library-actions"><button id="libraryRegister" class="primary-action">現在の完成画像を登録・上書き</button><button id="librarySave" class="secondary">選択枠をPNG保存</button><button id="libraryDelete" class="danger">選択枠を削除</button></div><p id="libraryMessage" class="library-help" role="status"></p><p class="library-help">※作業内容は自動保存されません。ページを閉じる前に「プロジェクトを保存」を押してください。予備枠は将来の提出用ZIPに含めません。</p></section><section id="assetSection"><strong>⑥ メイン画像・タブ画像を作成（STEP 17.0）</strong><p class="asset-help">⑤に登録した完成画像を選び、LINE登録用の画像を作れます。メイン画像とタブ画像はそれぞれ位置・大きさを保存します。</p><label for="assetSource">使用する完成画像 <select id="assetSource" style="width:100%;font-size:16px;padding:10px;margin-top:6px;border:1px solid #9eafc8;border-radius:8px"><option value="">⑤の画像を登録してください</option></select></label><div class="asset-tabs"><button id="assetMain" class="active" type="button">メイン画像<br><small>240 × 240px</small></button><button id="assetTab" type="button">タブ画像<br><small>96 × 74px</small></button></div><p id="assetDimension" class="asset-help">メイン画像：240 × 240px（main.png）</p><div class="asset-stage"><canvas id="assetCanvas" width="240" height="240" aria-label="画像を指で動かして位置調整"></canvas></div><p class="asset-help">画像を指やマウスで動かして位置を調整できます。拡大率はスライダーで変更できます。</p><div class="asset-control"><label for="assetScale">拡大率</label><input id="assetScale" type="range" min="20" max="300" value="100" step="1"><span id="assetScaleValue">100%</span></div><div class="toolrow"><button id="assetFit" class="secondary" type="button">◎ 枠内に収める</button><button id="assetCenter" class="secondary" type="button">＋ 中央に戻す</button></div><div class="asset-actions"><button id="assetSaveCurrent" class="primary-action" type="button">この画像をPNG保存</button><button id="assetSaveBoth" type="button">2種類をまとめて保存</button></div><p id="assetStatus" class="asset-help" role="status">⑤に完成画像を登録すると選択できます。</p><small>※保存時は市松模様を含まない透明PNGです。2種類の連続保存はSafariで許可が必要な場合があります。プロジェクト保存にも設定が含まれます。</small></section></main><script>
+(()=>{
+const $=id=>document.getElementById(id), editor=$('editor'), ec=editor.getContext('2d'), preview=$('preview'), pc=preview.getContext('2d');
+let format='sticker';const dimensions=()=>format==='emoji'?{w:180,h:180}:{w:370,h:320};let img=null,idx=0,polys=Array(8).fill(null),points=[],drawing=false,mode='bounds';const customRects=Array(8).fill(null),boundsUndo=Array.from({length:8},()=>[]);let boundDrag=null; const viewport=$('viewport');let zoom=1,base=1,tx=0,ty=0;const fingers=new Map();let gesture=null;let gestureUsed=false;let suppressPointUntil=0;
+const pv=$('previewViewport');let pscale=1,px=0,py=0,pbase=1;const pfingers=new Map();let pgesture=null;let tapCandidate=null;let tapPointerStart=null;
+let repairColor='#6B4032';let brushMode='pan',brushSize=18,painting=false,lastBrush=null,paintPointer=null,strokeChanged=false;let lassoPath=null,lassoPointer=null;
+ let spaceHeld=false,spaceDrag=null,activeArea='outline',previewMouse=null,previewPanPointer=null;
+ const placeHistory=Array.from({length:8},()=>[]);let placeDragStart=null;
+const edits=Array(8).fill(null),histories=Array.from({length:8},()=>[]);
+function freshCanvas(){let c=document.createElement('canvas');const {w,h}=dimensions();c.width=w;c.height=h;return c}
+function baseOutput(){return output(idx)}
+function editedOutput(i){let base=output(i),layer=edits[i];if(layer){let g=base.getContext('2d');g.clearRect(0,0,base.width,base.height);g.drawImage(layer,0,0)}return base}
+function ensureEdit(){if(!edits[idx]){edits[idx]=baseOutput()}return edits[idx]}
+function historyPush(){
+ // Record a pixel-exact copy BEFORE editing, including transparent pixels.
+ const current=edits[idx] || baseOutput();
+ const snapshot=document.createElement('canvas');
+ snapshot.width=current.width;snapshot.height=current.height;
+ snapshot.getContext('2d',{willReadFrequently:true}).drawImage(current,0,0);
+ histories[idx].push(snapshot);
+ if(histories[idx].length>30)histories[idx].shift();
+ updateUndo();
+}
+function updateUndo(){const available=histories[idx].length>0;$('editUndo').disabled=!available;$('editClear').disabled=!edits[idx];}
+function setBrushMode(m){
+ brushMode=m;lassoPath=null;lassoPointer=null;clearTapCandidate();
+ for(const [id,v] of [['toolPan','pan'],['toolTap','tap'],['toolLasso','lasso'],['toolSmart','smart'],['toolErase','erase'],['toolRestore','restore'],['toolColor','color'],['toolPicker','picker']])$(id).classList.toggle('active',m===v);
+ $('brushHint').textContent=({pan:'移動：1本指で移動、2本指で拡大縮小',tap:'タップ：候補を確認してから削除',lasso:'囲んで背景除去：画像を固定して指で囲む（拡大縮小は2本指）',smart:'背景だけ消す：灰色の点々をなぞって除去（色のある部分は保護）',erase:'消しゴム：1本指で不要部分をなぞる',restore:'復元ブラシ：消した部分をなぞって戻す',color:'カラーブラシ：選択色で描き足し・上塗り',picker:'スポイト：画像をタップして色を取得'})[m];
+ $('colorRepairPanel').style.display=(m==='color'||m==='picker')?'block':'none';$('tapPanel').style.display=m==='tap'?'block':'none';$('lassoPanel').style.display=m==='lasso'?'block':'none';
+ pv.classList.toggle('picker-active',m==='picker');updatePickerCursor();
+ updateBrushCursor();updateFloatingBrush();
+}
+
+function previewCoords(e){let r=pv.getBoundingClientRect(),sc=pbase*pscale;return{x:(e.clientX-r.left-px)/sc,y:(e.clientY-r.top-py)/sc}}
+function dab(x,y){let c=ensureEdit(),g=c.getContext('2d'),radius=brushSize/2;g.save();g.beginPath();g.arc(x,y,radius,0,Math.PI*2);g.clip();if(brushMode==='color'){g.fillStyle=repairColor;g.fillRect(x-radius-2,y-radius-2,brushSize+4,brushSize+4)}else if(brushMode==='smart'){const im=g.getImageData(Math.max(0,Math.floor(x-radius-2)),Math.max(0,Math.floor(y-radius-2)),Math.min(c.width-Math.max(0,Math.floor(x-radius-2)),Math.ceil(brushSize+4)),Math.min(c.height-Math.max(0,Math.floor(y-radius-2)),Math.ceil(brushSize+4)));const ox=Math.max(0,Math.floor(x-radius-2)),oy=Math.max(0,Math.floor(y-radius-2));for(let yy=0;yy<im.height;yy++)for(let xx=0;xx<im.width;xx++){const dx=ox+xx-x,dy=oy+yy-y;if(dx*dx+dy*dy>radius*radius)continue;const k=(yy*im.width+xx)*4;if(isGrayResidue(im.data,k,45))im.data[k+3]=0;}g.putImageData(im,ox,oy)}else if(brushMode==='erase'){g.clearRect(x-radius-2,y-radius-2,brushSize+4,brushSize+4)}else{let original=baseOutput();g.clearRect(x-radius-2,y-radius-2,brushSize+4,brushSize+4);g.drawImage(original,0,0)}g.restore();strokeChanged=true}
+function paintTo(e){let p=previewCoords(e);if(lastBrush){let d=Math.hypot(p.x-lastBrush.x,p.y-lastBrush.y),n=Math.max(1,Math.ceil(d/Math.max(1,brushSize/5)));for(let j=1;j<=n;j++){let t=j/n;dab(lastBrush.x+(p.x-lastBrush.x)*t,lastBrush.y+(p.y-lastBrush.y)*t)}}else dab(p.x,p.y);lastBrush=p;makePreview();}
+$('toolTap').onclick=()=>setBrushMode('tap');$('toolLasso').onclick=()=>setBrushMode('lasso');$('toolSmart').onclick=()=>setBrushMode('smart');$('toolPan').onclick=()=>setBrushMode('pan');$('toolErase').onclick=()=>setBrushMode('erase');$('toolRestore').onclick=()=>setBrushMode('restore');$('toolColor').onclick=()=>setBrushMode('color');$('toolPicker').onclick=()=>setBrushMode('picker');
+function setRepairColor(value){if(!/^#[0-9a-fA-F]{6}$/.test(value))return false;repairColor=value.toUpperCase();$('repairColor').value=repairColor;$('repairHex').value=repairColor;return true;}
+$('repairColor').addEventListener('input',e=>setRepairColor(e.target.value));$('repairHex').addEventListener('change',e=>{if(!setRepairColor(e.target.value)){$('repairStatus').textContent='カラーコードは #RRGGBB の形式で入力してください。';$('repairHex').value=repairColor;}});
+function updatePickerCursor(e){
+ const el=$('pickerCursor');if(!el)return;
+ if(brushMode!=='picker'||spaceHeld||pfingers.size>=2||!previewMouse||previewMouse.type==='touch'){el.style.display='none';return;}
+ const r=pv.getBoundingClientRect();el.style.left=(previewMouse.x-r.left)+'px';el.style.top=(previewMouse.y-r.top)+'px';el.style.display='block';
+}
+function showPickerFeedback(e,color){
+ const r=pv.getBoundingClientRect(),ring=document.createElement('div');ring.id='pickerFeedback';ring.style.left=(e.clientX-r.left)+'px';ring.style.top=(e.clientY-r.top)+'px';ring.style.setProperty('--picked',color);pv.appendChild(ring);ring.addEventListener('animationend',()=>ring.remove(),{once:true});
+}
+function pickRepairColor(e){const p=previewCoords(e),c=ensureEdit(),x=Math.floor(p.x),y=Math.floor(p.y);if(x<0||y<0||x>=c.width||y>=c.height)return;const d=c.getContext('2d',{willReadFrequently:true}).getImageData(x,y,1,1).data;if(d[3]===0){$('repairStatus').textContent='透明な場所です。色のある部分を選んでください。';return;}const hex='#'+[d[0],d[1],d[2]].map(v=>v.toString(16).padStart(2,'0')).join('');setRepairColor(hex);showPickerFeedback(e,repairColor);$('repairStatus').textContent='取得した色：'+repairColor+'（カラーブラシを選ぶと描けます）';}
+
+$('brushSize').oninput=e=>{brushSize=Number(e.target.value);$('brushValue').textContent=brushSize;updateBrushSizePreview();updateBrushCursor();updateFloatingBrush()};
+ function updateBrushSizePreview(){const circle=$('brushSizeCircle'),value=$('brushPreviewValue');if(!circle||!value)return;const diameter=Math.max(1,Math.min(90,brushSize));circle.style.width=diameter+'px';circle.style.height=diameter+'px';value.textContent=brushSize;}
+ function updateFloatingBrush(){
+  const panel=$('brushFloatingSample'),circle=$('brushFloatingCircle'),label=$('brushFloatingValue');
+  if(!panel||!circle||!label)return;
+  panel.style.display=brushMode==='pan'?'none':'flex';
+  const d=Math.max(1,Math.min(48,brushSize));
+  circle.style.width=d+'px';circle.style.height=d+'px';
+  label.textContent=brushSize+'px';
+  if(brushMode!=='pan')clampFloat();
+ }
+// Floating brush-size sample: drag it without painting on the underlying canvas.
+const brushFloat=$('brushFloatingSample');
+let floatDrag=null;
+function clampFloat(){
+ const w=brushFloat.offsetWidth,h=brushFloat.offsetHeight;
+ if(!w||!h)return;
+ let x=brushFloat.style.left?parseFloat(brushFloat.style.left):pv.clientWidth-w-12;
+ let y=brushFloat.style.top?parseFloat(brushFloat.style.top):12;
+ x=Math.max(0,Math.min(Math.max(0,pv.clientWidth-w),x));
+ y=Math.max(0,Math.min(Math.max(0,pv.clientHeight-h),y));
+ brushFloat.style.left=x+'px';brushFloat.style.top=y+'px';brushFloat.style.right='auto';
+}
+brushFloat.addEventListener('pointerdown',e=>{
+ if(brushMode==='pan'||brushMode==='tap'||brushMode==='lasso')return;
+ e.preventDefault();e.stopPropagation();clampFloat();
+ floatDrag={id:e.pointerId,x:e.clientX,y:e.clientY,left:parseFloat(brushFloat.style.left),top:parseFloat(brushFloat.style.top)};
+ brushFloat.setPointerCapture(e.pointerId);brushFloat.style.cursor='grabbing';
+});
+brushFloat.addEventListener('pointermove',e=>{
+ if(!floatDrag||floatDrag.id!==e.pointerId)return;
+ e.preventDefault();e.stopPropagation();
+ brushFloat.style.left=(floatDrag.left+e.clientX-floatDrag.x)+'px';
+ brushFloat.style.top=(floatDrag.top+e.clientY-floatDrag.y)+'px';
+ clampFloat();
+});
+function floatRelease(e){if(floatDrag&&floatDrag.id===e.pointerId){e.stopPropagation();floatDrag=null;brushFloat.style.cursor='grab'}}
+brushFloat.addEventListener('pointerup',floatRelease);
+brushFloat.addEventListener('pointercancel',floatRelease);
+brushFloat.addEventListener('click',e=>e.stopPropagation());
+function updateBrushCursor(e){
+  if(e && (e.pointerType==='mouse'||e.pointerType==='pen')) previewMouse={x:e.clientX,y:e.clientY,type:e.pointerType};
+  // Touch painting remains unobstructed; show the cursor for mouse and pen hover.
+  if(e && e.pointerType==='touch') previewMouse=null;
+  updatePickerCursor();
+  const cursor=$('brushCursor');
+  if(!previewMouse||brushMode==='pan'||brushMode==='tap'||brushMode==='lasso'||brushMode==='picker'||spaceHeld||pfingers.size>=2){cursor.style.display='none';return}
+  const r=pv.getBoundingClientRect();
+  const diameter=Math.max(0.1,brushSize*pbase*pscale);
+  // At very small brush sizes, the real brush footprint is shown with a
+  // contrasting center dot instead of making the circle misleadingly large.
+  cursor.style.width=diameter+'px';cursor.style.height=diameter+'px';
+  cursor.style.left=(previewMouse.x-r.left-diameter/2)+'px';
+  cursor.style.top=(previewMouse.y-r.top-diameter/2)+'px';
+  cursor.style.borderWidth=diameter<3?'1px':'1.5px';
+  cursor.style.borderColor=brushMode==='erase'?'#00a9d6':brushMode==='color'?'#e50069':'#f59e0b';
+  cursor.style.background=diameter<4?'rgba(255,255,255,.65)':'transparent';
+  cursor.style.boxShadow='0 0 0 1px white,0 0 3px #000a';
+  cursor.style.display='block';
+}
+ pv.addEventListener('pointerenter',e=>{activeArea='brush';updateBrushCursor(e)});pv.addEventListener('pointerleave',()=>{previewMouse=null;updateBrushCursor()});
+function undoLastEdit(){
+ const a=histories[idx];
+ if(!a||!a.length){if($('lassoStatus'))$('lassoStatus').textContent='戻せる編集履歴がありません。';return;}
+ const previous=a.pop();
+ // Restore a separate canvas to avoid accidental mutation of the history frame.
+ const restored=document.createElement('canvas');restored.width=previous.width;restored.height=previous.height;
+ restored.getContext('2d',{willReadFrequently:true}).drawImage(previous,0,0);
+ edits[idx]=restored;
+ clearTapCandidate();
+ makePreview();updateUndo();markProjectDirty();
+ if($('lassoStatus'))$('lassoStatus').textContent='直前の編集を戻しました（残り '+a.length+' 回）。';
+ if($('tapStatus'))$('tapStatus').textContent='直前の編集を戻しました。';
+}
+$('editUndo').onclick=undoLastEdit;
+
+$('editClear').onclick=()=>{edits[idx]=null;histories[idx]=[];makePreview();updateUndo()};
+
+function applyPreviewView(){const z=$('previewZoomLabel');if(z)z.textContent=Math.round(pscale*100)+'%';preview.style.width=preview.width+'px';preview.style.height=preview.height+'px';preview.style.transform=`translate(${px}px,${py}px) scale(${pbase*pscale})`;updateBrushCursor()}
+function resetPreviewView(){const {w,h}=dimensions();pbase=Math.min(pv.clientWidth/w,pv.clientHeight/h);pscale=1;px=(pv.clientWidth-w*pbase)/2;py=(pv.clientHeight-h*pbase)/2;applyPreviewView()}
+pv.addEventListener('pointerdown',e=>{activeArea='brush';e.preventDefault();pv.setPointerCapture(e.pointerId);pfingers.set(e.pointerId,{x:e.clientX,y:e.clientY});updateBrushCursor(e);if(pfingers.size===1&&brushMode==='lasso'&&!spaceHeld){lassoPointer=e.pointerId;lassoPath=[previewCoords(e)];clearTapCandidate();$('lassoStatus').textContent='指で囲んでください。画像は固定されています。';}if(pfingers.size===1&&brushMode==='picker'&&!spaceHeld){pickRepairColor(e);}if(pfingers.size===1&&brushMode==='tap'&&!spaceHeld){tapPointerStart={id:e.pointerId,x:e.clientX,y:e.clientY};}if(pfingers.size===1&&brushMode!=='pan'&&brushMode!=='tap'&&brushMode!=='lasso'&&brushMode!=='picker'&&!spaceHeld){historyPush();painting=true;paintPointer=e.pointerId;strokeChanged=false;lastBrush=null;paintTo(e)}if(pfingers.size===2){lassoPath=null;lassoPointer=null;makePreview();updateBrushCursor();painting=false;lastBrush=null;let a=[...pfingers.values()],r=pv.getBoundingClientRect(),cx=(a[0].x+a[1].x)/2-r.left,cy=(a[0].y+a[1].y)/2-r.top;pgesture={dist:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),scale:pscale,px,py,cx,cy}}});
+pv.addEventListener('pointermove',e=>{updateBrushCursor(e);if(!pfingers.has(e.pointerId))return;e.preventDefault();let old=pfingers.get(e.pointerId);pfingers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pfingers.size===2&&pgesture){let a=[...pfingers.values()],r=pv.getBoundingClientRect(),cx=(a[0].x+a[1].x)/2-r.left,cy=(a[0].y+a[1].y)/2-r.top,d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),next=Math.max(1,Math.min(12,pgesture.scale*d/Math.max(1,pgesture.dist))),ratio=next/pgesture.scale;pscale=next;px=cx-(pgesture.cx-pgesture.px)*ratio;py=cy-(pgesture.cy-pgesture.py)*ratio;applyPreviewView()}else if(pfingers.size===1){if(spaceHeld){px+=e.clientX-old.x;py+=e.clientY-old.y;applyPreviewView()}else if(brushMode==='lasso'){if(lassoPointer===e.pointerId&&lassoPath){const pt=previewCoords(e),prev=lassoPath[lassoPath.length-1];if(Math.hypot(pt.x-prev.x,pt.y-prev.y)>=1.5){lassoPath.push(pt);drawLassoPath();}}}else if(brushMode==='picker'){/* sampling only on pointerdown */}else if(brushMode==='pan'||brushMode==='tap'||spaceHeld){if(brushMode==='tap'&&tapPointerStart&&Math.hypot(e.clientX-tapPointerStart.x,e.clientY-tapPointerStart.y)<12){/* wait for tap */}else{px+=e.clientX-old.x;py+=e.clientY-old.y;applyPreviewView()}}else if(painting&&paintPointer===e.pointerId)paintTo(e)}});
+function previewRelease(e){if(brushMode==='lasso'&&lassoPointer===e.pointerId&&lassoPath){const path=lassoPath;lassoPath=null;lassoPointer=null;if(path.length>=3){chooseLassoRegion(path)}else{$('lassoStatus').textContent='範囲を囲めませんでした。もう一度なぞってください。';makePreview();}}if(!spaceHeld&&brushMode==='tap'&&tapPointerStart&&tapPointerStart.id===e.pointerId&&pfingers.size===1&&Math.hypot(e.clientX-tapPointerStart.x,e.clientY-tapPointerStart.y)<12){chooseTapRegion(previewCoords(e));}tapPointerStart=null;pfingers.delete(e.pointerId);if(e.pointerType==='touch'){previewMouse=null;updateBrushCursor()}else updateBrushCursor(e);if(paintPointer===e.pointerId){painting=false;paintPointer=null;lastBrush=null;updateUndo()}pgesture=null}pv.addEventListener('pointerup',previewRelease);pv.addEventListener('pointercancel',previewRelease);
+// STEP 17.0: inspection is CSS-only and never changes exported canvases.
+const inspectBgNames={checker:'チェック柄',white:'白',black:'黒'};
+const inspectBgStyles={checker:'repeating-conic-gradient(#ddd 0 25%,#fff 0 50%) 0/20px 20px',white:'#fff',black:'#111'};
+function setInspectionBackground(kind){
+ if(!inspectBgStyles[kind])return;
+ for(const id of ['previewViewport','placementViewport'])$(id).style.setProperty('--inspection-bg',inspectBgStyles[kind]);
+ document.querySelectorAll('[data-inspect-bg]').forEach(b=>{const on=b.dataset.inspectBg===kind;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on))});
+ $('inspectStatus').textContent=inspectBgNames[kind]+'背景で確認中。白い縁・暗い輪郭・消し残しを拡大して確認してください。';
+}
+document.querySelectorAll('[data-inspect-bg]').forEach(b=>b.addEventListener('click',()=>setInspectionBackground(b.dataset.inspectBg)));
+$('inspectEdges').addEventListener('change',e=>{for(const id of ['previewViewport','placementViewport'])$(id).classList.toggle('inspect-edges',e.target.checked)});
+setInspectionBackground('checker');
+$('previewReset').onclick=resetPreviewView;
+function zoomPreviewAt(factor,cx,cy){if(!img)return;const next=Math.max(1,Math.min(12,pscale*factor));const ratio=next/pscale;px=cx-(cx-px)*ratio;py=cy-(cy-py)*ratio;pscale=next;applyPreviewView()}
+$('previewZoomIn').onclick=()=>zoomPreviewAt(1.25,pv.clientWidth/2,pv.clientHeight/2);
+$('previewZoomOut').onclick=()=>zoomPreviewAt(1/1.25,pv.clientWidth/2,pv.clientHeight/2);
+pv.addEventListener('wheel',e=>{if(!img)return;e.preventDefault();const r=pv.getBoundingClientRect();zoomPreviewAt(Math.exp(-e.deltaY*.0015),e.clientX-r.left,e.clientY-r.top)},{passive:false});
+
+function setFormat(next){
+ if(next===format)return;
+ if(img&&edits.some(Boolean)&&!confirm('保存サイズを切り替えると、消しゴム・復元ブラシの手直しは初期化されます。切り替えますか？'))return;
+ format=next;
+ $('formatSticker').classList.toggle('selected',format==='sticker');
+ $('formatEmoji').classList.toggle('selected',format==='emoji');
+ const {w,h}=dimensions();
+ $('formatNote').textContent=`現在：LINE${format==='emoji'?'絵文字':'スタンプ'}（${w} × ${h}px）`;
+ $('frameDimensions').textContent=`${w} × ${h}px`;
+ placement.style.aspectRatio=`${w}/${h}`;
+ $('margin').max=format==='emoji'?'25':'35';
+ if(Number($('margin').value)>Number($('margin').max))$('margin').value=$('margin').max;
+ $('marginValue').textContent=$('margin').value;
+ for(let j=0;j<8;j++){edits[j]=null;histories[j]=[];placeHistory[j]=[];placements[j]={scale:1,x:0,y:0};}
+ updateUndo();
+ resetPreviewView();
+ if(img)makePreview();
+}
+$('formatSticker').onclick=()=>setFormat('sticker');
+$('formatEmoji').onclick=()=>setFormat('emoji');
+const cells=$('cells');
+const placementCells=$('placementCells');
+const editorCellsTop=$('editorCellsTop'),editorCellsBottom=$('editorCellsBottom');
+const allCellSelectors=[cells,editorCellsTop,editorCellsBottom,placementCells];
+function updateCellNumbers(){const offset=sourceStart(sourceIndex);for(const target of allCellSelectors)Array.from(target.children).forEach((b,i)=>{b.textContent=String(offset+i+1).padStart(2,'0');b.style.display=i<sourceCount?'':'none';b.disabled=i>=sourceCount;});$('all').textContent=sourceCount+'枚を順番に保存';}
+function selectCell(i){if(!img||i>=sourceCount)return;idx=i;drawing=false;points=[];mode='bounds';render();centerSelected();updateUndo();$('modehint').textContent='白い丸をドラッグして青い範囲を調整。四角の内側で範囲を移動できます。';}
+for(let i=0;i<8;i++){
+  for(const target of allCellSelectors){
+    let b=document.createElement('button');b.type='button';b.textContent=String(i+1).padStart(2,'0');b.onclick=()=>selectCell(i);target.appendChild(b);
+  }
+}
+function defaultRect(i){
+ const count=sourceCount;
+ if(count===1)return{x:0,y:0,w:img.width,h:img.height};
+ let cols,rows;
+ if(sourceLayout==='4x2'){cols=4;rows=2;}
+ else if(sourceLayout==='2x4'){cols=2;rows=4;}
+ else {cols=img.width>=img.height?Math.min(count,4):Math.ceil(count/2);rows=Math.ceil(count/cols);}
+ const col=i%cols,row=Math.floor(i/cols),x=Math.round(col*img.width/cols),y=Math.round(row*img.height/rows),right=Math.round((col+1)*img.width/cols),bottom=Math.round((row+1)*img.height/rows);
+ return{x,y,w:Math.max(1,right-x),h:Math.max(1,bottom-y)};
+}
+function rect(i){return customRects[i]||defaultRect(i)}
+function fitView(){if(!img)return;const w=viewport.clientWidth,h=viewport.clientHeight;base=Math.min(w/img.width,h/img.height);zoom=1;tx=(w-img.width*base)/2;ty=(h-img.height*base)/2;applyView()}
+function applyView(){const z=$('zoomLabel');if(z)z.textContent=Math.round(zoom*100)+'%';editor.style.width=img.width+'px';editor.style.height=img.height+'px';editor.style.transform=`translate(${tx}px,${ty}px) scale(${base*zoom})`}
+function pointAt(x,y){const r=viewport.getBoundingClientRect(),sc=base*zoom;return [Math.max(0,Math.min(img.width,(x-r.left-tx)/sc)),Math.max(0,Math.min(img.height,(y-r.top-ty)/sc))]}
+function updateOutlineMode(){
+ const b=$('polygon'),tag=$('modeBadge');b.classList.remove('is-drawing','is-done');tag.classList.remove('drawing','done');
+ if(drawing&&mode==='draw'){b.classList.add('is-drawing');b.textContent='● 輪郭指定中';tag.classList.add('drawing');tag.textContent='🔴 輪郭指定中：タップで点を追加';}
+ else if(polys[idx]){b.classList.add('is-done');b.textContent='✓ 指定完了（再指定）';tag.classList.add('done');tag.textContent='✓ 輪郭確定済み';}
+ else{b.textContent='輪郭を指定';tag.textContent='✋ 移動モード';}
+ $('boundsMode').classList.toggle('selected',mode==='bounds');$('boundsHelp').style.display=mode==='bounds'?'block':'none';if(mode==='bounds'){tag.textContent='🔵 青い範囲を調整中';} $('panmode').classList.toggle('selected',mode==='pan');b.classList.toggle('selected',mode==='draw'&&drawing);
+}
+function render(){if(!img)return;updateOutlineMode();
+// Entire original is always shown, so polygon coordinates can cross 4x2 boundaries.
+editor.width=img.width;editor.height=img.height;ec.clearRect(0,0,img.width,img.height);ec.drawImage(img,0,0);
+let r=rect(idx);ec.save();ec.strokeStyle='#2367d9';ec.lineWidth=Math.max(2,img.width/450);ec.setLineDash([12,8]);ec.strokeRect(r.x,r.y,r.w,r.h);ec.restore();
+if(mode==='bounds'){
+ const handles=rectHandles(r);const radius=Math.max(7,12/(base*zoom));
+ ec.save();ec.lineWidth=Math.max(2,2/(base*zoom));
+ for(const h of handles){ec.beginPath();ec.arc(h.x,h.y,radius,0,Math.PI*2);ec.fillStyle='#fff';ec.fill();ec.strokeStyle='#167dcb';ec.stroke()}
+ ec.restore();
+}
+let pts=drawing?points:polys[idx];if(pts&&pts.length){ec.strokeStyle='#e50069';ec.fillStyle='#e50069';ec.lineWidth=Math.max(3,img.width/350);ec.beginPath();pts.forEach((p,i)=>i?ec.lineTo(p[0],p[1]):ec.moveTo(p[0],p[1]));if(!drawing)ec.closePath();ec.stroke();pts.forEach(p=>{ec.beginPath();ec.arc(p[0],p[1],Math.max(5,img.width/240),0,Math.PI*2);ec.fill()})}
+for(const target of allCellSelectors)Array.from(target.children).forEach((b,i)=>b.classList.toggle('active',i===idx));$('finish').disabled=!drawing||points.length<3;$('status').textContent=`画像 ${img.width}×${img.height} ／ スタンプ ${sourceStart(sourceIndex)+idx+1}（元画像内 ${idx+1}/${sourceCount}） ${polys[idx]?'（囲み指定済み）':'（青点線は切り抜き範囲）'}`;makePreview()}
+ // STEP 14: background classification per source image, independent of crop and layout.
+ const backgroundCache=new WeakMap();
+ function detectBackground(im){
+  if(backgroundCache.has(im))return backgroundCache.get(im);
+  const c=document.createElement('canvas');c.width=Math.min(240,im.naturalWidth||im.width);c.height=Math.min(180,im.naturalHeight||im.height);
+  const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0,c.width,c.height);
+  const d=g.getImageData(0,0,c.width,c.height).data,w=c.width,h=c.height;
+  let transparent=0,neutral=0,white=0,gray=0,light=0,lum=[];
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+   if(x>12&&x<w-13&&y>12&&y<h-13)continue;
+   let k=(y*w+x)*4,r=d[k],gg=d[k+1],b=d[k+2],a=d[k+3];
+   if(a<245){transparent++;continue}
+   let spread=Math.max(r,gg,b)-Math.min(r,gg,b),v=(r+gg+b)/3;
+   if(spread<19){neutral++;if(v>242)white++;if(v>90&&v<225)gray++;if(v>90)lum.push(v)}
+   if(v>235)light++;
+  }
+  const total=2*w*13+2*(h-26)*13;
+  let result='white';
+  if(transparent>total*.025)result='transparent';
+  else if(neutral>total*.62&&gray>total*.16&&white>total*.10)result='checker';
+  else if(light>total*.78)result='white';
+  else if(neutral>total*.65&&gray>total*.30)result='solid';
+  backgroundCache.set(im,result);return result;
+ }
+ function effectiveBackground(){if(backgroundMode!=='auto')return backgroundMode;try{return detectBackground(img)}catch(err){console.warn(err);return 'white'}}
+ function updateBackgroundStatus(){if(!img)return;const names={transparent:'透過済み',checker:'市松模様',white:'白背景',solid:'単色背景'};let detected='white';try{detected=detectBackground(img)}catch(err){console.warn('Background detection failed',err)}$('backgroundDetected').textContent='推定：'+names[detected]+' ／ 使用：'+(backgroundMode==='auto'?'自動（'+names[detected]+'）':names[backgroundMode]);}
+ $('backgroundMode').addEventListener('change',e=>{if(!img)return;backgroundMode=e.target.value;sourceSheets[sourceIndex].backgroundMode=backgroundMode;for(let i=0;i<8;i++){edits[i]=null;histories[i]=[]}updateBackgroundStatus();makePreview();updateUndo();markProjectDirty()});
+ function applyBackgroundRemoval(canvas,hasPolygon){
+  const mode=effectiveBackground();if(mode==='transparent')return;
+  const w=canvas.width,h=canvas.height,g=canvas.getContext('2d',{willReadFrequently:true});
+  const im=g.getImageData(0,0,w,h),d=im.data,n=w*h,threshold=Number($('threshold').value);
+  if(mode!=='checker'){
+   const good=new Uint8Array(n),seen=new Uint8Array(n),queue=new Int32Array(n);let head=0,tail=0;
+   let sr=0,sg=0,sb=0,sc=0;
+   if(mode==='solid')for(let x=0;x<w;x+=Math.max(1,Math.floor(w/40))){let k=x*4;sr+=d[k];sg+=d[k+1];sb+=d[k+2];sc++}
+   const bg=sc?[sr/sc,sg/sc,sb/sc]:[255,255,255];
+   for(let i=0;i<n;i++){let k=i*4,r=d[k],v=d[k+1],b=d[k+2];if(d[k+3]<8)continue;
+    good[i]=mode==='white'?(255-Math.min(r,v,b)<=threshold)?1:0:(Math.hypot(r-bg[0],v-bg[1],b-bg[2])<Math.max(24,threshold*1.7))?1:0;
+   }
+   function push(i){if(i<0||i>=n||seen[i]||!good[i])return;seen[i]=1;queue[tail++]=i}
+   for(let x=0;x<w;x++){push(x);push((h-1)*w+x)}for(let y=0;y<h;y++){push(y*w);push(y*w+w-1)}
+   while(head<tail){let i=queue[head++],x=i%w,y=(i/w)|0;if(x)push(i-1);if(x<w-1)push(i+1);if(y)push(i-w);if(y<h-1)push(i+w);if(x&&y)push(i-w-1);if(x<w-1&&y)push(i-w+1);if(x&&y<h-1)push(i+w-1);if(x<w-1&&y<h-1)push(i+w+1)}
+   for(let i=0;i<n;i++)if(seen[i])d[i*4+3]=0;
+   g.putImageData(im,0,0);return;
+  }
+  // STEP 17.0: build a solid foreground silhouette from colored and ink pixels.
+  // Unlike a global gray/white key, this protects white letters, cream paws and LCD fills.
+  const seed=new Uint8Array(n),grown=new Uint8Array(n),filled=new Uint8Array(n),outside=new Uint8Array(n);
+  for(let i=0;i<n;i++){
+   let k=i*4,r=d[k],v=d[k+1],b=d[k+2],hi=Math.max(r,v,b),lo=Math.min(r,v,b),lum=(r+v+b)/3;
+   // saturated pink/peach and very dark brown ink are foreground anchors
+   if(d[k+3]>8&&((hi-lo>52&&lum>70)||(lum<70)))seed[i]=1;
+  }
+  // Close small gaps in the outline using two 1D sliding-window dilations.
+  // The radius is modest and scales with image resolution.
+  const rad=Math.max(3,Math.min(10,Math.round(Math.min(w,h)*.012)));
+  const tmp=new Uint8Array(n);
+  for(let y=0;y<h;y++){let count=0;for(let x=0;x<w+rad;x++){
+   if(x<w&&seed[y*w+x])count++;
+   if(x-rad-1>=0&&seed[y*w+x-rad-1])count--;
+   if(x>=rad&&x-rad<w)tmp[y*w+x-rad]=count>0?1:0;
+  }}
+  for(let x=0;x<w;x++){let count=0;for(let y=0;y<h+rad;y++){
+   if(y<h&&tmp[y*w+x])count++;
+   if(y-rad-1>=0&&tmp[(y-rad-1)*w+x])count--;
+   if(y>=rad&&y-rad<h)grown[(y-rad)*w+x]=count>0?1:0;
+  }}
+  // Fill enclosed interior: flood from the border through areas outside the grown silhouette.
+  const queue=new Int32Array(n);let head=0,tail=0;
+  function push(i){if(i<0||i>=n||outside[i]||grown[i])return;outside[i]=1;queue[tail++]=i}
+  for(let x=0;x<w;x++){push(x);push((h-1)*w+x)}
+  for(let y=0;y<h;y++){push(y*w);push(y*w+w-1)}
+  while(head<tail){let i=queue[head++],x=i%w,y=(i/w)|0;if(x)push(i-1);if(x<w-1)push(i+1);if(y)push(i-w);if(y<h-1)push(i+w)}
+  for(let i=0;i<n;i++)filled[i]=outside[i]?0:1;
+  // Limit broad silhouette dilation: retain true foreground and the enclosed white interiors.
+  // Outside the silhouette, remove neutral checkerboard pixels; colorful detached hearts survive.
+  for(let i=0;i<n;i++){
+   let k=i*4;if(d[k+3]<8)continue;
+   if(filled[i])continue;
+   let r=d[k],v=d[k+1],b=d[k+2],spread=Math.max(r,v,b)-Math.min(r,v,b),lum=(r+v+b)/3;
+   if(spread<Math.max(43,threshold*1.2)&&lum>65)d[k+3]=0;
+  }
+  g.putImageData(im,0,0);
+ }
+
+function output(i){let poly=polys[i],r;
+if(poly&&poly.length>=3){let xs=poly.map(p=>p[0]),ys=poly.map(p=>p[1]),pad=Math.max(3,Math.round(img.width/250)),x=Math.max(0,Math.floor(Math.min(...xs))-pad),y=Math.max(0,Math.floor(Math.min(...ys))-pad),right=Math.min(img.width,Math.ceil(Math.max(...xs))+pad),bottom=Math.min(img.height,Math.ceil(Math.max(...ys))+pad);r={x,y,w:Math.max(1,right-x),h:Math.max(1,bottom-y)}}else r=rect(i);
+let c=document.createElement('canvas');c.width=r.w;c.height=r.h;let g=c.getContext('2d',{willReadFrequently:true});g.drawImage(img,r.x,r.y,r.w,r.h,0,0,r.w,r.h);
+if(poly&&poly.length>=3){ // Polygon clipping preserves white text, white outlines, and light character details.
+let mask=document.createElement('canvas');mask.width=r.w;mask.height=r.h;let mg=mask.getContext('2d');mg.fillStyle='#fff';mg.beginPath();poly.forEach((p,k)=>k?mg.lineTo(p[0]-r.x,p[1]-r.y):mg.moveTo(p[0]-r.x,p[1]-r.y));mg.closePath();mg.fill();g.globalCompositeOperation='destination-in';g.drawImage(mask,0,0);g.globalCompositeOperation='source-over';
+ }
+ applyBackgroundRemoval(c,poly&&poly.length>=3);
+ // Fit content inside the official LINE static-sticker canvas without cropping.
+let out=document.createElement('canvas');const {w,h}=dimensions();out.width=w;out.height=h;let og=out.getContext('2d');let margin=Number($('margin').value),scale=Math.min((w-2*margin)/r.w,(h-2*margin)/r.h),dw=r.w*scale,dh=r.h*scale;og.drawImage(c,(w-dw)/2,(h-dh)/2,dw,dh);return out}
+const placement=$('placementViewport'),placeCanvas=$('placementCanvas'),placeCtx=placeCanvas.getContext('2d');
+ viewport.addEventListener('pointerenter',()=>{activeArea='outline'});placement.addEventListener('pointerenter',()=>{activeArea='placement'});
+const saveFrame=$('saveFrame');
+ const placements=Array.from({length:8},()=>({scale:1,x:0,y:0}));let placeFingers=new Map(),placeGesture=null,placeBase=1;
+function finalOutput(i){let source=editedOutput(i),t=placements[i],c=freshCanvas(),g=c.getContext('2d');g.drawImage(source,t.x,t.y,source.width*t.scale,source.height*t.scale);return c}
+function paintPlacement(){if(!img)return;let t=placements[idx];const {w,h}=dimensions();placeCanvas.width=w;placeCanvas.height=h;placeCtx.clearRect(0,0,w,h);placeCtx.drawImage(editedOutput(idx),t.x,t.y,w*t.scale,h*t.scale);$('placeStatus').textContent='拡大率：'+Math.round(t.scale*100)+'% ／ 移動：横 '+Math.round(t.x)+'px・縦 '+Math.round(t.y)+'px';placeBase=placement.clientWidth/w;placeCanvas.style.width='100%';placeCanvas.style.height='100%';placeCanvas.style.transform='none';saveFrame.style.display='none';updateFitWarning()}
+function placementPoint(e){let r=placement.getBoundingClientRect();const {w,h}=dimensions();return{x:(e.clientX-r.left)*w/r.width,y:(e.clientY-r.top)*h/r.height}}
+placement.addEventListener('pointerdown',e=>{if(!img)return;activeArea='placement';if(placeFingers.size===0)placeDragStart={...placements[idx]};e.preventDefault();placement.setPointerCapture(e.pointerId);let q=placementPoint(e);placeFingers.set(e.pointerId,q);if(placeFingers.size===2){let a=[...placeFingers.values()],t=placements[idx];placeGesture={distance:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),scale:t.scale,x:t.x,y:t.y,cx:(a[0].x+a[1].x)/2,cy:(a[0].y+a[1].y)/2}}});
+placement.addEventListener('pointermove',e=>{if(!placeFingers.has(e.pointerId)||!img)return;e.preventDefault();let prev=placeFingers.get(e.pointerId),q=placementPoint(e);placeFingers.set(e.pointerId,q);let t=placements[idx];if(placeFingers.size===2&&placeGesture){let a=[...placeFingers.values()],cx=(a[0].x+a[1].x)/2,cy=(a[0].y+a[1].y)/2,d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y),next=Math.max(.2,Math.min(5,placeGesture.scale*d/Math.max(1,placeGesture.distance))),ratio=next/placeGesture.scale;t.scale=next;t.x=cx-(placeGesture.cx-placeGesture.x)*ratio;t.y=cy-(placeGesture.cy-placeGesture.y)*ratio}else if(placeFingers.size===1){t.x+=q.x-prev.x;t.y+=q.y-prev.y}paintPlacement()});
+function placeRelease(e){placeFingers.delete(e.pointerId);if(placeFingers.size===0&&placeDragStart){const t=placements[idx],o=placeDragStart;if(t.x!==o.x||t.y!==o.y||t.scale!==o.scale)pushPlaceUndo(o);placeDragStart=null}placeGesture=null}placement.addEventListener('pointerup',placeRelease);placement.addEventListener('pointercancel',placeRelease);
+function pushPlaceUndo(snapshot){let a=placeHistory[idx];a.push({...snapshot});if(a.length>30)a.shift()}
+ $('placeReset').onclick=()=>{if(!confirm('このスタンプの配置を初期状態に戻しますか？'))return;pushPlaceUndo(placements[idx]);placements[idx]={scale:1,x:0,y:0};paintPlacement()};
+function alphaBounds(c){
+ const w=c.width,h=c.height,d=c.getContext('2d',{willReadFrequently:true}).getImageData(0,0,w,h).data;
+ let left=w,top=h,right=-1,bottom=-1;
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  if(d[(y*w+x)*4+3]>8){if(x<left)left=x;if(x>right)right=x;if(y<top)top=y;if(y>bottom)bottom=y}
+ }
+ return right<0?null:{left,top,right: right+1,bottom:bottom+1,width:right-left+1,height:bottom-top+1};
+}
+function updateFitWarning(){
+ if(!img)return;
+ const b=alphaBounds(editedOutput(idx)),el=$('fitWarning');
+ if(!b){el.textContent='画像が透明です。輪郭指定や消しゴムを確認してください。';return}
+ const t=placements[idx],edge=1,{w,h}=dimensions();
+ const clipped=t.x+b.left*t.scale<edge||t.y+b.top*t.scale<edge||t.x+b.right*t.scale>w-edge||t.y+b.bottom*t.scale>h-edge;
+ const sourceEdge=b.left<=1||b.top<=1||b.right>=w-1||b.bottom>=h-1;
+ el.textContent=clipped?'⚠ 文字やキャラクターが保存範囲からはみ出しています。「枠内に収める」を押してください。':sourceEdge?'※ 元の切り抜き画像が端まで達しています。輪郭指定ですでに欠けた部分は、自動調整では復元できません。':'✓ 現在の画像は保存範囲に収まっています。';
+}
+$('placeCenter').onclick=()=>{if(!img)return;const b=alphaBounds(editedOutput(idx));if(!b)return;const t=placements[idx];pushPlaceUndo(t);const {w,h}=dimensions();t.x=(w-(b.left+b.right)*t.scale)/2;t.y=(h-(b.top+b.bottom)*t.scale)/2;paintPlacement()};
+$('placeFit').onclick=()=>{
+ if(!img)return;
+ const b=alphaBounds(editedOutput(idx));if(!b){paintPlacement();return}
+ const {w,h}=dimensions(),margin=Math.max(8,Number($('margin').value));
+ const scale=Math.min((w-2*margin)/b.width,(h-2*margin)/b.height);
+ pushPlaceUndo(placements[idx]);placements[idx]={scale,x:(w-b.width*scale)/2-b.left*scale,y:(h-b.height*scale)/2-b.top*scale};
+ paintPlacement();
+};
+function makePreview(){
+ if(!img)return;if(tapCandidate&&(tapCandidate.w!==dimensions().w||tapCandidate.h!==dimensions().h))tapCandidate=null;
+ try {
+  let c=editedOutput(idx);preview.width=c.width;preview.height=c.height;
+  pc.clearRect(0,0,c.width,c.height);pc.drawImage(c,0,0);
+  drawTapOverlay();applyPreviewView();paintPlacement();
+ }catch(err){
+  console.error('Preview processing failed',err);
+  const {w,h}=dimensions();preview.width=w;preview.height=h;
+  pc.clearRect(0,0,w,h);
+  const r=rect(idx);if(r&&r.w>0&&r.h>0){const scale=Math.min((w-20)/r.w,(h-20)/r.h);pc.drawImage(img,r.x,r.y,r.w,r.h,(w-r.w*scale)/2,(h-r.h*scale)/2,r.w*scale,r.h*scale)}
+  applyPreviewView();
+  $('status').textContent='元画像は読み込めました。背景処理でエラーが発生したため、元画像を仮表示しています：'+(err.message||err);
+ }
+}
+// STEP 17.0: safe, region-limited removal of low-chroma gray residue.
+function isGrayResidue(d,k,tol){
+ const a=d[k+3],r=d[k],g=d[k+1],b=d[k+2];if(a<12)return false;
+ const hi=Math.max(r,g,b),lo=Math.min(r,g,b);
+ // Preserve very dark outlines, pure-white lettering, vivid pink, tan and blue artwork.
+ return hi>=65 && hi<Math.min(245,190+tol*.45) && hi-lo<Math.min(38,12+tol*.35);
+}
+function drawLassoPath(){makePreview();if(!lassoPath||lassoPath.length<2)return;pc.save();pc.strokeStyle='#ef1675';pc.lineWidth=2;pc.setLineDash([5,3]);pc.beginPath();pc.moveTo(lassoPath[0].x,lassoPath[0].y);for(const p of lassoPath.slice(1))pc.lineTo(p.x,p.y);pc.stroke();pc.restore()}
+function chooseLassoRegion(path){
+ const c=editedOutput(idx),w=c.width,h=c.height,mask=document.createElement('canvas');mask.width=w;mask.height=h;
+ const mg=mask.getContext('2d',{willReadFrequently:true});mg.fillStyle='#fff';mg.beginPath();mg.moveTo(path[0].x,path[0].y);for(const p of path.slice(1))mg.lineTo(p.x,p.y);mg.closePath();mg.fill();
+ const md=mg.getImageData(0,0,w,h).data,d=c.getContext('2d',{willReadFrequently:true}).getImageData(0,0,w,h).data,indices=[],tol=Number($('lassoTolerance').value);
+ for(let i=0;i<w*h;i++){const k=i*4;if(md[k+3]>127&&isGrayResidue(d,k,tol))indices.push(i)}
+ if(!indices.length){$('lassoStatus').textContent='候補が見つかりません。範囲や判定の強さを調整してください。';makePreview();return}
+ tapCandidate={indices,w,h};$('lassoApply').disabled=false;$('lassoCancel').disabled=false;
+ $('lassoStatus').textContent='ピンクの候補：'+indices.length+'ピクセル。文字やキャラが選ばれていないか確認してください。';makePreview();
+}
+$('lassoTolerance').oninput=e=>{$('lassoToleranceValue').textContent=e.target.value;clearTapCandidate();$('lassoApply').disabled=true;$('lassoCancel').disabled=true;};
+$('lassoCancel').onclick=()=>{clearTapCandidate();$('lassoApply').disabled=true;$('lassoCancel').disabled=true;makePreview();};
+$('lassoApply').onclick=()=>{if(!tapCandidate||!tapCandidate.indices.length)return;historyPush();const c=ensureEdit(),g=c.getContext('2d',{willReadFrequently:true}),im=g.getImageData(0,0,c.width,c.height);for(const i of tapCandidate.indices)im.data[i*4+3]=0;g.putImageData(im,0,0);tapCandidate=null;$('lassoApply').disabled=true;$('lassoCancel').disabled=true;$('lassoStatus').textContent='除去しました。必要なら「1操作戻す」で取り消せます。';makePreview();updateUndo();markProjectDirty();};
+// STEP 17.0: preview-first connected-region removal on the edited 370x320 / 180x180 canvas.
+function clearTapCandidate(){tapCandidate=null;const a=$('tapApply'),b=$('tapCancel');if(a)a.disabled=true;if(b)b.disabled=true;if($('lassoApply'))$('lassoApply').disabled=true;if($('lassoCancel'))$('lassoCancel').disabled=true;if($('tapStatus'))$('tapStatus').textContent='画像の背景をタップしてください。';if(img&&preview.width>1){pc.clearRect(0,0,preview.width,preview.height);pc.drawImage(editedOutput(idx),0,0);}}
+function tapRegion(p){
+ const c=editedOutput(idx),w=c.width,h=c.height,x=Math.floor(p.x),y=Math.floor(p.y);
+ if(x<0||x>=w||y<0||y>=h)return null;
+ const d=c.getContext('2d',{willReadFrequently:true}).getImageData(0,0,w,h).data,n=w*h,start=y*w+x,k=start*4;
+ if(d[k+3]<20)return {indices:[],w,h};
+ const sr=d[k],sg=d[k+1],sb=d[k+2],spread=Math.max(sr,sg,sb)-Math.min(sr,sg,sb);
+ // Reject strongly colored artwork, dark outlines and high-chroma features.
+ if(spread>43||Math.max(sr,sg,sb)<85)return {unsafe:true};
+ const tol=Number($('tapTolerance').value),seen=new Uint8Array(n),queue=new Int32Array(n),indices=[];let head=0,tail=1;queue[0]=start;seen[start]=1;
+ while(head<tail){const i=queue[head++],a=i*4,r=d[a],g=d[a+1],b=d[a+2],alpha=d[a+3],chroma=Math.max(r,g,b)-Math.min(r,g,b);
+  if(alpha<20||chroma>Math.max(26,Math.min(46,tol))||Math.max(r,g,b)<80||Math.max(Math.abs(r-sr),Math.abs(g-sg),Math.abs(b-sb))>tol*2.4)continue;
+  indices.push(i);const xx=i%w,yy=(i/w)|0;
+  if(xx>0&&!seen[i-1]){seen[i-1]=1;queue[tail++]=i-1}
+  if(xx<w-1&&!seen[i+1]){seen[i+1]=1;queue[tail++]=i+1}
+  if(yy>0&&!seen[i-w]){seen[i-w]=1;queue[tail++]=i-w}
+  if(yy<h-1&&!seen[i+w]){seen[i+w]=1;queue[tail++]=i+w}
+ }
+ return {indices,w,h};
+}
+function drawTapOverlay(){if(!tapCandidate||!tapCandidate.indices.length)return;const {indices,w,h}=tapCandidate;const overlay=pc.createImageData(w,h);for(const i of indices){const k=i*4;overlay.data[k]=245;overlay.data[k+1]=38;overlay.data[k+2]=130;overlay.data[k+3]=145;}const temp=document.createElement('canvas');temp.width=w;temp.height=h;temp.getContext('2d').putImageData(overlay,0,0);pc.drawImage(temp,0,0);}
+function chooseTapRegion(p){if(!img)return;tapCandidate=tapRegion(p);if(!tapCandidate)return;
+ if(tapCandidate.unsafe){tapCandidate=null;$('tapStatus').textContent='色のついた部分や輪郭は保護しています。背景のグレー部分をタップしてください。';return}
+ const count=tapCandidate.indices.length;
+ if(!count){tapCandidate=null;$('tapStatus').textContent='削除できる背景が見つかりませんでした。';return}
+ $('tapStatus').textContent='ピンク色の候補：'+count+'ピクセル。文字・キャラクターが含まれていないか確認してください。';$('tapApply').disabled=false;$('tapCancel').disabled=false;makePreview();}
+$('tapTolerance').oninput=e=>{$('tapToleranceValue').textContent=e.target.value;if(tapCandidate)clearTapCandidate();};
+$('tapCancel').onclick=()=>{clearTapCandidate();makePreview()};
+$('tapApply').onclick=()=>{if(!tapCandidate||!tapCandidate.indices.length)return;historyPush();const c=ensureEdit(),g=c.getContext('2d',{willReadFrequently:true}),im=g.getImageData(0,0,c.width,c.height);for(const i of tapCandidate.indices)im.data[i*4+3]=0;g.putImageData(im,0,0);tapCandidate=null;$('tapApply').disabled=true;$('tapCancel').disabled=true;$('tapStatus').textContent='除去しました。「1操作戻す」で取り消せます。';makePreview();updateUndo();markProjectDirty();};
+// STEP 11.4: multiple original sheets, each with its own eight editing states.
+let sourceSheets=[],sourceIndex=-1,sourceLayout='4x2',sourceCount=8;let backgroundMode='auto';
+function sourceStart(j){return sourceSheets.slice(0,Math.max(0,j)).reduce((n,a)=>n+layoutCount(a.layout,a.count),0)}
+function batchStartDefault(){return Math.min(55,sourceStart(sourceIndex))}
+function refreshBatchOptions(preferred){const select=$('batchGroup');const count=sourceCount;const desired=Number.isInteger(preferred)?preferred:batchStartDefault();select.replaceChildren();for(let i=0;i<=56-count;i++){const o=document.createElement('option');o.value=String(i);o.textContent=libraryNumber(i)+(count>1?'〜'+libraryNumber(i+count-1):'')+(i+count<=registrationCount?'（登録用）':i>=registrationCount?'（予備）':'（登録用・予備）');select.appendChild(o)}select.value=String(Math.min(56-count,Math.max(0,desired)));$('batchHeading').textContent='現在の'+count+'枚をまとめて登録';$('libraryBatch').textContent=count===1?'現在の1枚を登録':'現在の'+count+'枚をまとめて登録'}
+ function layoutCount(layout,count){return layout==='1'?1:layout==='custom'?Math.max(2,Math.min(7,Number(count)||3)):8;}
+function captureSource(){
+ if(sourceIndex<0||!sourceSheets[sourceIndex])return;
+ const a=sourceSheets[sourceIndex];a.polys=polys.slice();a.customRects=customRects.slice();a.count=sourceCount;a.backgroundMode=backgroundMode;
+ a.boundsUndo=boundsUndo.map(v=>v.slice());a.edits=edits.slice();a.histories=histories.map(v=>v.slice());
+ a.placements=placements.map(v=>({...v}));a.placeHistory=placeHistory.map(v=>v.slice());a.idx=idx;
+}
+
+// STEP 13: source selection status is independent from native file input's cleared value.
+function updateSourceFileCount(){const el=document.getElementById('sourceFileCount');if(!el)return;const n=sourceSheets.length;el.textContent=n?`✓ ${n}枚読み込み済み`:'画像は未読み込み';el.classList.toggle('loaded',n>0);}
+ function syncProjectControls(){
+  const loaded=sourceSheets.length>0;
+  $('projectSection').classList.toggle('has-sources',loaded);
+  $('compactProject').classList.toggle('has-sources',loaded);
+  $('compactProjectStatus').textContent=$('projectStatus').textContent;
+ }
+ function sourceUI(){
+  updateSourceFileCount();syncProjectControls();
+  const host=$('sourceButtons');host.replaceChildren();
+  sourceSheets.forEach((sheet,j)=>{
+   const row=document.createElement('div');row.className='source-item';
+   const b=document.createElement('button');b.type='button';b.className='source-choice'+(j===sourceIndex?' active':'');
+   const start=sourceStart(j),count=layoutCount(sheet.layout,sheet.count);b.textContent=`${String(start+1).padStart(2,'0')}${count>1?'〜'+String(start+count).padStart(2,'0'):''}（${count}個）：${sheet.fileName}`;b.style.fontSize='12px';b.onclick=()=>switchSource(j);
+   const remove=document.createElement('button');remove.type='button';remove.className='source-remove';
+   remove.textContent='×';remove.setAttribute('aria-label',sheet.fileName+' を削除');remove.title='この元画像を削除';
+   remove.onclick=()=>removeSource(j);
+   row.append(b,remove);host.appendChild(row);
+  });
+  if(sourceIndex>=0&&sourceSheets[sourceIndex]){
+   $('sourceLayout').value=sourceLayout;$('sourceCount').value=String(sourceCount>=2&&sourceCount<=7?sourceCount:3);$('sourceCountRow').style.display=sourceLayout==='custom'?'block':'none';
+   $('sourceInfo').textContent=`元画像 ${sourceIndex+1}/${sourceSheets.length}：${sourceSheets[sourceIndex].fileName} ／ ${sourceLayout==='4x2'?'4列×2行':sourceLayout==='2x4'?'2列×4行':sourceLayout==='1'?'分割なし':'自由指定'}（${sourceCount}個）。編集内容は元画像ごとに保持します。`;
+  }else{
+   $('sourceInfo').textContent='画像を読み込むと切り替えられます。';$('sourceCountRow').style.display='none';
+  }
+ }
+ function removeSource(j){
+  if(j<0||j>=sourceSheets.length)return;
+  const target=sourceSheets[j];
+  if(!confirm('「'+target.fileName+'」を削除しますか？\nこの元画像の切り抜き・ブラシ修正・配置調整は削除されます。\n⑤に登録済みの完成画像は残ります。'))return;
+  captureSource();
+  const current=sourceIndex;
+  sourceSheets.splice(j,1);
+  if(sourceSheets.length){
+   const next=j===current?Math.min(j,sourceSheets.length-1):current>j?current-1:current;
+   sourceIndex=-1;
+   switchSource(next);
+  }else{
+   sourceIndex=-1;img=null;idx=0;sourceLayout='4x2';sourceCount=8;
+   polys=Array(8).fill(null);customRects.fill(null);
+   for(let k=0;k<8;k++){boundsUndo[k]=[];edits[k]=null;histories[k]=[];placements[k]={scale:1,x:0,y:0};placeHistory[k]=[];}
+   editor.width=1;editor.height=1;preview.width=1;preview.height=1;
+   placeCtx.clearRect(0,0,placeCanvas.width,placeCanvas.height);
+   refreshBatchOptions(0);sourceUI();updateCellNumbers();updateUndo();
+   $('status').textContent='画像を選択してください';$('fitWarning').textContent='';
+  }
+  $('status').textContent=sourceSheets.length?`元画像を削除しました。残り${sourceSheets.length}枚です。`:'元画像は0枚です。保存済みの完成画像は⑤に残っています。';
+  markProjectDirty();
+ }
+function switchSource(j){
+ if(j<0||j>=sourceSheets.length)return;tapCandidate=null;
+ captureSource();sourceIndex=j;const a=sourceSheets[j];img=a.image;sourceLayout=a.layout;sourceCount=layoutCount(a.layout,a.count);backgroundMode=a.backgroundMode||'auto';$('backgroundMode').value=backgroundMode;updateBackgroundStatus();
+ polys=a.polys.slice();customRects.splice(0,8,...a.customRects);
+ for(let i=0;i<8;i++){boundsUndo[i]=a.boundsUndo[i].slice();edits[i]=a.edits[i];histories[i]=a.histories[i].slice();placements[i]={...a.placements[i]};placeHistory[i]=a.placeHistory[i].slice();}
+ idx=Math.min(sourceCount-1,a.idx);drawing=false;points=[];mode='bounds';refreshBatchOptions();updateCellNumbers();sourceUI();fitView();resetPreviewView();render();centerSelected();updateUndo();
+}
+function loadSourceFile(f){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(f),im=new Image();im.onload=()=>{URL.revokeObjectURL(url);resolve({image:im,fileName:f.name,layout:im.width>=im.height?'4x2':'2x4',count:8,backgroundMode:'auto',polys:Array(8).fill(null),customRects:Array(8).fill(null),boundsUndo:Array.from({length:8},()=>[]),edits:Array(8).fill(null),histories:Array.from({length:8},()=>[]),placements:Array.from({length:8},()=>({scale:1,x:0,y:0})),placeHistory:Array.from({length:8},()=>[]),idx:0})};im.onerror=()=>{URL.revokeObjectURL(url);reject(new Error(f.name+' を読み込めませんでした'))};im.src=url})}
+$('file').onchange=async e=>{
+ const files=Array.from(e.target.files||[]).sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));if(!files.length)return;
+ if(files.length>7){alert('元画像は最大7枚まで選択してください。');e.target.value='';return;}
+ if(sourceSheets.length&&!confirm('新しい元画像を読み込むと、現在の元画像とその編集中データは置き換わります。続けますか？')){e.target.value='';return;}
+ try{const loaded=await Promise.all(files.map(loadSourceFile));sourceSheets=loaded;sourceIndex=-1;try{switchSource(0)}catch(renderErr){console.error(renderErr);img=loaded[0].image;sourceIndex=0;sourceLayout=loaded[0].layout;sourceCount=8;fitView();editor.width=img.width;editor.height=img.height;ec.drawImage(img,0,0);sourceUI();$('status').textContent='画像の読み込みは成功しましたが、表示処理に問題があります：'+(renderErr.message||renderErr)}if(!$('status').textContent.includes('問題'))$('status').textContent=`元画像を${loaded.length}枚読み込みました。画像ごとに並び方を確認してください。`;}
+ catch(err){console.error('画像読込エラー',err);$('status').textContent='画像の表示に失敗しました：'+(err.message||String(err));alert('画像の表示に失敗しました：'+(err.message||String(err)))}e.target.value='';
+};
+$('sourceLayout').onchange=e=>{if(!img)return;const next=e.target.value;if(next===sourceLayout)return;
+ if(!confirm('並び方を変更しますか？ この元画像の輪郭指定・ブラシ修正・配置調整は初期化されます。')){e.target.value=sourceLayout;return;}
+ sourceLayout=next;sourceCount=layoutCount(next,3);const a=sourceSheets[sourceIndex];a.layout=next;a.count=sourceCount;polys=Array(8).fill(null);customRects.fill(null);boundsUndo.forEach(v=>v.length=0);
+ for(let i=0;i<8;i++){edits[i]=null;histories[i]=[];placements[i]={scale:1,x:0,y:0};placeHistory[i]=[];}
+ idx=0;drawing=false;points=[];mode='bounds';updateCellNumbers();render();centerSelected();updateUndo();sourceUI();
+};
+$('sourceCount').onchange=e=>{if(!img||sourceLayout!=='custom')return;const n=layoutCount('custom',e.target.value);if(n===sourceCount)return;if(!confirm('個数を変更すると、この元画像の切り抜き・ブラシ修正・配置調整は初期化されます。続けますか？')){e.target.value=sourceCount;return;}sourceCount=n;sourceSheets[sourceIndex].count=n;polys=Array(8).fill(null);customRects.fill(null);boundsUndo.forEach(v=>v.length=0);for(let i=0;i<8;i++){edits[i]=null;histories[i]=[];placements[i]={scale:1,x:0,y:0};placeHistory[i]=[];}idx=0;drawing=false;points=[];mode='bounds';refreshBatchOptions();updateCellNumbers();render();centerSelected();updateUndo();sourceUI();};
+$('polygon').onclick=()=>{if(!img)return;drawing=true;mode='draw';points=[];render();$('modehint').textContent='タップで点を追加・ドラッグで移動・2本指で拡大縮小。'};
+$('panmode').onclick=()=>{mode='pan';updateOutlineMode();$('modehint').textContent='移動モード：1本指で移動・2本指で拡大縮小';};$('home').onclick=()=>{if(confirm('画像の表示倍率と位置をリセットしますか？（輪郭指定は残ります）'))fitView()};
+function rectHandles(r){let l=r.x,t=r.y,rr=l+r.w,b=t+r.h,mx=(l+rr)/2,my=(t+b)/2;return [{id:'tl',x:l,y:t},{id:'t',x:mx,y:t},{id:'tr',x:rr,y:t},{id:'r',x:rr,y:my},{id:'br',x:rr,y:b},{id:'b',x:mx,y:b},{id:'bl',x:l,y:b},{id:'l',x:l,y:my}]}
+function boundsHit(clientX,clientY){let p=pointAt(clientX,clientY),r=rect(idx),tol=22/(base*zoom);for(let h of rectHandles(r)){if(Math.hypot(p[0]-h.x,p[1]-h.y)<tol)return h.id}if(p[0]>=r.x&&p[0]<=r.x+r.w&&p[1]>=r.y&&p[1]<=r.y+r.h)return 'move';return null}
+function boundsMove(hit,original,dx,dy){let l=original.x,t=original.y,rr=l+original.w,b=t+original.h,min=Math.max(8,img.width/160);
+ if(hit==='move'){dx=Math.max(-l,Math.min(img.width-rr,dx));dy=Math.max(-t,Math.min(img.height-b,dy));l+=dx;rr+=dx;t+=dy;b+=dy}
+ else{if(hit.includes('l'))l=Math.min(rr-min,Math.max(0,l+dx));if(hit.includes('r'))rr=Math.max(l+min,Math.min(img.width,rr+dx));if(hit.includes('t'))t=Math.min(b-min,Math.max(0,t+dy));if(hit.includes('b'))b=Math.max(t+min,Math.min(img.height,b+dy))}
+ return {x:Math.round(l),y:Math.round(t),w:Math.round(rr-l),h:Math.round(b-t)}
+}
+$('boundsMode').onclick=()=>{if(!img)return;drawing=false;points=[];mode='bounds';render();$('modehint').textContent='白い丸をドラッグして青い範囲を調整。四角の内側で範囲を移動できます。'};
+$('boundsReset').onclick=()=>{if(!img)return;if(!confirm('選択中スタンプの青い範囲を初期状態に戻しますか？'))return;boundsUndo[idx].push({...rect(idx)});customRects[idx]=null;edits[idx]=null;histories[idx]=[];render();updateUndo()};
+function zoomEditor(factor){if(!img)return;const cx=viewport.clientWidth/2,cy=viewport.clientHeight/2;const next=Math.max(.5,Math.min(12,zoom*factor)),ratio=next/zoom;tx=cx-(cx-tx)*ratio;ty=cy-(cy-ty)*ratio;zoom=next;applyView()}
+$('zoomIn').onclick=()=>zoomEditor(1.35);
+$('zoomOut').onclick=()=>zoomEditor(1/1.35);
+viewport.addEventListener('wheel',e=>{if(!img)return;e.preventDefault();const r=viewport.getBoundingClientRect(),cx=e.clientX-r.left,cy=e.clientY-r.top;const next=Math.max(.5,Math.min(12,zoom*Math.exp(-e.deltaY*.0015))),ratio=next/zoom;tx=cx-(cx-tx)*ratio;ty=cy-(cy-ty)*ratio;zoom=next;applyView()},{passive:false});
+function centerSelected(){if(!img)return;const r=rect(idx),sc=base*zoom;tx=viewport.clientWidth/2-(r.x+r.w/2)*sc;ty=viewport.clientHeight/2-(r.y+r.h/2)*sc;applyView()}
+$('centerSelected').onclick=centerSelected;
+viewport.addEventListener('contextmenu',e=>e.preventDefault());
+viewport.addEventListener('pointerdown',e=>{
+ if(!img)return;activeArea='outline';e.preventDefault();viewport.setPointerCapture(e.pointerId);
+ fingers.set(e.pointerId,{x:e.clientX,y:e.clientY,sx:e.clientX,sy:e.clientY});
+ if(spaceHeld&&e.pointerType==='mouse'&&fingers.size===1){spaceDrag={id:e.pointerId,x:e.clientX,y:e.clientY,zoom,tx,ty};boundDrag=null;return;}
+ if(mode==='bounds'&&fingers.size===1){let hit=boundsHit(e.clientX,e.clientY);if(hit)boundDrag={pointer:e.pointerId,hit,start:pointAt(e.clientX,e.clientY),original:{...rect(idx)},changed:false}}
+ if(fingers.size>=2){boundDrag=null;gestureUsed=true;suppressPointUntil=Date.now()+350;
+ const a=[...fingers.values()].slice(0,2),r=viewport.getBoundingClientRect();
+ gesture={dist:Math.max(1,Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y)),zoom,tx,ty,
+ cx:(a[0].x+a[1].x)/2-r.left,cy:(a[0].y+a[1].y)/2-r.top};
+ }
+});
+viewport.addEventListener('pointermove',e=>{
+ if(!fingers.has(e.pointerId)||!img)return;e.preventDefault();
+ const old=fingers.get(e.pointerId);
+ fingers.set(e.pointerId,{...old,x:e.clientX,y:e.clientY});
+ if(spaceDrag&&spaceDrag.id===e.pointerId){
+  tx+=e.clientX-old.x;ty+=e.clientY-old.y;applyView();return;
+ }
+ if(fingers.size>=2&&gesture){
+  const a=[...fingers.values()].slice(0,2),r=viewport.getBoundingClientRect();
+  const cx=(a[0].x+a[1].x)/2-r.left,cy=(a[0].y+a[1].y)/2-r.top;
+  const d=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);
+  const next=Math.max(.5,Math.min(12,gesture.zoom*d/gesture.dist));
+  const ratio=next/gesture.zoom;zoom=next;
+  tx=cx-(gesture.cx-gesture.tx)*ratio;
+  ty=cy-(gesture.cy-gesture.ty)*ratio;
+  applyView();
+ }else if(boundDrag&&boundDrag.pointer===e.pointerId&&fingers.size===1){
+  const p=pointAt(e.clientX,e.clientY),d=boundDrag;
+  const next=boundsMove(d.hit,d.original,p[0]-d.start[0],p[1]-d.start[1]);
+  customRects[idx]=next;d.changed=true;render();
+ }else if(fingers.size===1&&!gestureUsed){
+  tx+=e.clientX-old.x;ty+=e.clientY-old.y;applyView();
+ }
+});
+function release(e){
+ if(!fingers.has(e.pointerId))return;
+ const f=fingers.get(e.pointerId),single=fingers.size===1;if(spaceDrag&&spaceDrag.id===e.pointerId){spaceDrag=null;fingers.delete(e.pointerId);gesture=null;gestureUsed=false;return;}
+ if(boundDrag&&boundDrag.pointer===e.pointerId){if(boundDrag.changed){boundsUndo[idx].push(boundDrag.original);if(boundsUndo[idx].length>30)boundsUndo[idx].shift();edits[idx]=null;histories[idx]=[];updateUndo()}boundDrag=null}
+ const addPoint=single&&!gestureUsed&&!spaceHeld&&Date.now()>suppressPointUntil&&mode==='draw'&&drawing&&Math.hypot(e.clientX-f.sx,e.clientY-f.sy)<14;
+ fingers.delete(e.pointerId);
+ if(addPoint){points.push(pointAt(e.clientX,e.clientY));render()}
+ if(fingers.size===1&&gestureUsed){suppressPointUntil=Date.now()+350;gesture=null}
+ if(fingers.size===0){gesture=null;gestureUsed=false;suppressPointUntil=Date.now()+200}
+}
+viewport.addEventListener('pointerup',release);
+viewport.addEventListener('pointercancel',e=>{spaceDrag=null;boundDrag=null;fingers.delete(e.pointerId);gesture=null;gestureUsed=fingers.size>0;suppressPointUntil=Date.now()+350});
+// iOS Safari changes the visual viewport height when its toolbar collapses.
+// Preserve the editing position and zoom on height-only resize events.
+let lastEditorWidth=viewport.clientWidth;
+let lastPreviewWidth=pv.clientWidth;
+window.addEventListener('resize',()=>{
+ const ew=viewport.clientWidth,pw=pv.clientWidth;
+ if(img && Math.abs(ew-lastEditorWidth)>1){
+  const oldCenterX=(lastEditorWidth/2-tx)/(base*zoom);
+  const oldCenterY=(viewport.clientHeight/2-ty)/(base*zoom);
+  base=Math.min(ew/img.width,viewport.clientHeight/img.height);
+  tx=ew/2-oldCenterX*base*zoom;
+  ty=viewport.clientHeight/2-oldCenterY*base*zoom;
+  applyView();
+ }
+ if(Math.abs(pw-lastPreviewWidth)>1){
+  // Keep preview zoom and its image center when its width really changes.
+  const oldScale=pbase*pscale;
+  const centerX=(lastPreviewWidth/2-px)/oldScale;
+  const centerY=(pv.clientHeight/2-py)/oldScale;
+  const {w,h}=dimensions();pbase=Math.min(pv.clientWidth/w,pv.clientHeight/h);
+  px=pv.clientWidth/2-centerX*pbase*pscale;
+  py=pv.clientHeight/2-centerY*pbase*pscale;
+  applyPreviewView();
+ }
+ lastEditorWidth=ew;lastPreviewWidth=pw;
+ if(img)paintPlacement();
+});
+$('finish').onclick=()=>{if(points.length<3)return;polys[idx]=points.map(p=>p.slice());drawing=false;points=[];mode="pan";render()};
+$('undo').onclick=()=>{if(drawing){points.pop();render()}else if(mode==='bounds'&&boundsUndo[idx].length){customRects[idx]=boundsUndo[idx].pop();edits[idx]=null;histories[idx]=[];render()}};
+ function keyboardUndo(){if(!img)return;if(activeArea==='outline'){if(drawing&&points.length){points.pop();render()}else if(mode==='bounds'&&boundsUndo[idx].length){customRects[idx]=boundsUndo[idx].pop();edits[idx]=null;histories[idx]=[];render()}}else if(activeArea==='brush'){undoLastEdit()}else if(activeArea==='placement'){let a=placeHistory[idx];if(a.length){placements[idx]=a.pop();paintPlacement()}}}
+ function typingTarget(e){const t=e.target;return t&&((t.tagName==='INPUT')||(t.tagName==='TEXTAREA')||t.isContentEditable)}
+ function changeBrushSize(delta){const slider=$('brushSize');slider.value=String(Math.max(Number(slider.min),Math.min(Number(slider.max),brushSize+delta)));slider.dispatchEvent(new Event('input',{bubbles:true}));}
+ window.addEventListener('keydown',e=>{if(typingTarget(e) && !(e.target.tagName==='INPUT' && e.target.type==='range'))return;
+  // Photoshop-style [ / ] brush sizing. On Windows JIS, the physical
+  // [ key is often BracketRight and the ] (mu) key is Backslash.
+  // Prioritize the produced character to avoid treating JIS [ as increase.
+  if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.repeat){
+    const key=e.key,code=e.code;
+    const smallChar=key==='['||key==='［'||key==='「'||key==='｢';
+    const largeChar=key===']'||key==='］'||key==='」'||key==='｣';
+    let direction=0;
+    if(smallChar) direction=-1;
+    else if(largeChar) direction=1;
+    else if(code==='Backslash'||e.keyCode===220) direction=1; // JIS む
+    else if(code==='BracketRight' && key!==']') direction=-1; // JIS ［
+    else if(code==='BracketLeft' && key!=='@') direction=-1; // US ［
+    else if(code==='BracketRight') direction=1; // US ］
+    if(direction){e.preventDefault();changeBrushSize(direction);return;}
+  }
+  if(e.code==='Space'){spaceHeld=true;updateBrushCursor();e.preventDefault();return}if((e.ctrlKey||e.metaKey)&&!e.altKey&&e.key.toLowerCase()==='z'&&!e.shiftKey){e.preventDefault();keyboardUndo();return}if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&!spaceHeld&&img){
+   if(e.shiftKey&&e.code==='KeyC'){e.preventDefault();centerSelected();return;}
+   if(!e.shiftKey){
+    if(e.code==='KeyD'&&!e.repeat&&activeArea==='brush'){const id=brushMode==='tap'?'tapApply':brushMode==='lasso'?'lassoApply':null;if(id&&!$(id).disabled&&tapCandidate&&tapCandidate.indices&&tapCandidate.indices.length){e.preventDefault();$(id).click();return;}}
+     if(e.code==='KeyE'){e.preventDefault();setBrushMode('erase');return;}
+    if(e.code==='KeyB'){e.preventDefault();setBrushMode('restore');return;}
+    if(e.code==='KeyI'){e.preventDefault();setBrushMode('picker');return;}
+    if(e.code==='KeyC'){e.preventDefault();setBrushMode('color');return;}
+    if(e.code==='KeyV'){e.preventDefault();setBrushMode('pan');return;}
+   }
+
+  }if(e.shiftKey&&!e.ctrlKey&&!e.metaKey&&!e.altKey){if(e.code==='ArrowUp'){e.preventDefault();zoomEditor(1.35)}else if(e.code==='ArrowDown'){e.preventDefault();zoomEditor(1/1.35)}}});
+ window.addEventListener('keyup',e=>{if(e.code==='Space'){spaceHeld=false;updateBrushCursor()}});window.addEventListener('blur',()=>{spaceHeld=false;spaceDrag=null;updateBrushCursor()});
+$('reset').onclick=()=>{if(!confirm('このスタンプの輪郭指定と手直しを解除しますか？'))return;polys[idx]=null;points=[];drawing=false;edits[idx]=null;histories[idx]=[];render();updateUndo()};
+$('threshold').oninput=e=>{$('tv').textContent=e.target.value;edits[idx]=null;histories[idx]=[];makePreview();updateUndo()};$('refresh').onclick=makePreview;$('margin').oninput=e=>{$('marginValue').textContent=e.target.value;edits[idx]=null;histories[idx]=[];makePreview();updateUndo()};
+function save(c,name){c.toBlob(blob=>{if(!blob)return;let u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),30000)},'image/png')}
+function name(i){return (format==='emoji'?'emoji_':'stamp_')+String(i+1).padStart(2,'0')+'.png'}
+$('download').onclick=()=>{if(img)save(finalOutput(idx),name(idx))};$('all').onclick=()=>{if(!img)return;for(let i=0;i<sourceCount;i++)setTimeout(()=>save(finalOutput(i),name(i)),i*450)};
+
+ // STEP 11.4: session-only 56-image library. Stored as snapshots of final PNG canvases.
+ const librarySlots=Array(56).fill(null);
+ let registrationCount=40;
+ const registrationCountEl=$('registrationCount');
+ function refreshRegistrationChoices(){
+  const values=format==='emoji'?Array.from({length:33},(_,i)=>i+8):[8,16,24,32,40];
+  const previous=registrationCount;
+  registrationCountEl.replaceChildren();
+  for(const n of values){const opt=document.createElement('option');opt.value=String(n);opt.textContent=n+'個';registrationCountEl.appendChild(opt);}
+  registrationCount=values.includes(previous)?previous:40;registrationCountEl.value=String(registrationCount);
+  $('registrationCountHelp').textContent=format==='emoji'?'通常のLINE絵文字は8〜40個を1個刻みで選べます。個数を減らしても画像は消えません。':'静止画LINEスタンプは8・16・24・32・40個から選べます。個数を減らしても画像は消えません。';
+  if(typeof libraryRender==='function' && libraryButtons.length)libraryRender();
+ }
+ registrationCountEl.addEventListener('change',()=>{registrationCount=Number(registrationCountEl.value);libraryRender();$('libraryMessage').textContent='提出用 '+registrationCount+'個に設定しました。画像は削除されず、超過分は予備として残ります。';});
+ const libraryGrid=$('libraryGrid');
+ let librarySelected=0,librarySwapSource=null,libraryDragSource=null,libraryDropHandled=false;
+ let libraryMultiMode=false;const libraryMultiSelected=new Set();
+ const libraryButtons=[];
+ function libraryNumber(i){return String(i+1).padStart(format==='emoji'?3:2,'0')}
+ function libraryName(i){return libraryNumber(i)+'.png'}
+ function libraryRender(){
+  let mainCount=librarySlots.slice(0,registrationCount).filter(Boolean).length;
+  let spareCount=librarySlots.slice(registrationCount).filter(Boolean).length;
+  $('libraryCount').textContent='登録用：'+mainCount+' / '+registrationCount+'枚 ／ 予備：'+spareCount+' / '+(56-registrationCount)+'枚';
+  $('librarySubmitRange').textContent='登録用 '+libraryNumber(0)+'〜'+libraryNumber(registrationCount-1);
+  $('librarySpareRange').textContent='予備 '+libraryNumber(registrationCount)+'〜'+libraryNumber(55);
+  if(img){const selected=Number($('batchGroup').value);refreshBatchOptions(selected)}
+  libraryGrid.setAttribute('aria-label','完成画像の登録用'+registrationCount+'枠と予備'+(56-registrationCount)+'枠の管理');
+  for(let i=0;i<56;i++){
+   const b=libraryButtons[i],entry=librarySlots[i];
+   b.className='library-slot'+(i===librarySelected?' selected':'')+(entry?' filled':'')+(i>=registrationCount?' spare':'')+(libraryMultiSelected.has(i)?' multi-picked':'');
+   b.draggable=!!entry&&!libraryMultiMode; b.replaceChildren();
+   const visual=document.createElement(entry?'img':'div');
+   if(entry){visual.src=entry.url;visual.alt=libraryNumber(i)+'の完成画像'}
+   else{visual.className='empty';visual.textContent='＋'}
+   const caption=document.createElement('span');caption.textContent=libraryNumber(i);
+   b.append(visual,caption);
+   if(libraryMultiSelected.has(i)){const mark=document.createElement('span');mark.className='multi-mark';mark.textContent='✓';b.appendChild(mark);}
+  }
+  $('librarySelected').textContent='選択中：'+libraryNumber(librarySelected)+(librarySelected>=registrationCount?'（予備候補）':'（提出候補）')+(librarySlots[librarySelected]?'・登録済み':'・未登録');
+  $('librarySave').disabled=!librarySlots[librarySelected];
+  $('libraryDelete').disabled=!librarySlots[librarySelected];
+  $('libraryMultiToggle').textContent=libraryMultiMode?'☑ 複数選択モード：ON':'☑ 複数選択モード：OFF';$('libraryMultiToggle').classList.toggle('is-on',libraryMultiMode);
+  $('libraryMultiTools').style.display=libraryMultiMode?'block':'none';
+  $('libraryMultiCount').textContent=libraryMultiMode?'選択中：'+libraryMultiSelected.size+'枚':'通常は1枚ずつ操作します。';
+  $('libraryMultiSave').disabled=libraryMultiSelected.size===0;
+  $('libraryMultiDelete').disabled=libraryMultiSelected.size===0;
+  $('librarySwap').disabled=libraryMultiMode;
+  $('librarySwap').textContent=librarySwapSource===null?'並べ替え：移動元を選択':'移動元 '+libraryNumber(librarySwapSource)+' → 移動先をタップ';
+ }
+ for(let i=0;i<56;i++){
+  let b=document.createElement('button');b.type='button';b.setAttribute('aria-label','画像枠 '+(i+1));
+  b.onclick=()=>{
+   if(libraryDropHandled)return;
+   if(libraryMultiMode){if(librarySlots[i]){if(libraryMultiSelected.has(i))libraryMultiSelected.delete(i);else libraryMultiSelected.add(i);}else{$('libraryMessage').textContent='未登録の枠は選択できません。';}libraryRender();return;}
+   if(librarySwapSource!==null){
+    const from=librarySwapSource;librarySwapSource=null;
+    if(from!==i){[librarySlots[from],librarySlots[i]]=[librarySlots[i],librarySlots[from]];$('libraryMessage').textContent=libraryNumber(from)+' と '+libraryNumber(i)+' を入れ替えました。';}
+   }
+   librarySelected=i;libraryRender();
+  };
+  // PC: native drag-and-drop swaps the registered PNG entries, including spare slots.
+  b.addEventListener('dragstart',e=>{
+   if(libraryMultiMode||!librarySlots[i]){e.preventDefault();return;}
+   libraryDragSource=i;libraryDropHandled=false;
+   e.dataTransfer.effectAllowed='move';
+   e.dataTransfer.setData('text/plain',String(i));
+   b.classList.add('dragging');
+  });
+  b.addEventListener('dragover',e=>{
+   if(libraryDragSource===null)return;
+   e.preventDefault();e.dataTransfer.dropEffect='move';b.classList.add('drag-target');
+  });
+  b.addEventListener('dragleave',()=>b.classList.remove('drag-target'));
+  b.addEventListener('drop',e=>{
+   e.preventDefault();e.stopPropagation();b.classList.remove('drag-target');
+   const from=libraryDragSource;
+   if(from===null)return;
+   libraryDropHandled=true;librarySwapSource=null;
+   if(from!==i){[librarySlots[from],librarySlots[i]]=[librarySlots[i],librarySlots[from]];
+    $('libraryMessage').textContent=libraryNumber(from)+' と '+libraryNumber(i)+' をドラッグで入れ替えました。';}
+   librarySelected=i;libraryRender();
+  });
+  b.addEventListener('dragend',()=>{
+   libraryDragSource=null;
+   for(const item of libraryButtons)item.classList.remove('dragging','drag-target');
+   // Suppress the synthetic click that some browsers fire after a drag.
+   setTimeout(()=>{libraryDropHandled=false},100);
+  });
+  libraryGrid.appendChild(b);libraryButtons.push(b);
+ }
+ // STEP 13: mobile long-press drag swap. Normal short taps and page scrolling remain available.
+ let touchSwap=null,touchSwapTimer=null,touchSwapSuppressClick=false;
+ function touchSwapClear(){
+  if(touchSwapTimer!==null){clearTimeout(touchSwapTimer);touchSwapTimer=null;}
+  for(const button of libraryButtons)button.classList.remove('touch-source','touch-target');
+  touchSwap=null;
+ }
+ function touchSwapTarget(x,y){
+  const el=document.elementFromPoint(x,y);
+  const slot=el&&el.closest('.library-slot');
+  if(!slot||!libraryGrid.contains(slot))return null;
+  const n=libraryButtons.indexOf(slot);
+  return n>=0?n:null;
+ }
+ libraryGrid.addEventListener('touchstart',e=>{
+  if(e.touches.length!==1){touchSwapClear();return;}
+  const slot=e.target.closest('.library-slot');
+  if(!slot||libraryMultiMode)return;
+  const from=libraryButtons.indexOf(slot);
+  if(from<0||!librarySlots[from])return;
+  const t=e.touches[0];
+  touchSwapClear();
+  touchSwap={from,startX:t.clientX,startY:t.clientY,x:t.clientX,y:t.clientY,active:false,target:null};
+  touchSwapTimer=setTimeout(()=>{
+   touchSwapTimer=null;
+   if(!touchSwap)return;
+   touchSwap.active=true;
+   libraryButtons[touchSwap.from].classList.add('touch-source');
+   $('libraryMessage').textContent=libraryNumber(touchSwap.from)+' を移動中です。移動先の番号で指を離してください。';
+   if(navigator.vibrate)navigator.vibrate(20);
+  },350);
+ },{passive:true});
+ libraryGrid.addEventListener('touchmove',e=>{
+  if(!touchSwap||e.touches.length!==1)return;
+  const t=e.touches[0];touchSwap.x=t.clientX;touchSwap.y=t.clientY;
+  if(!touchSwap.active){
+   if(Math.hypot(t.clientX-touchSwap.startX,t.clientY-touchSwap.startY)>12)touchSwapClear();
+   return;
+  }
+  e.preventDefault();
+  const target=touchSwapTarget(t.clientX,t.clientY);
+  if(touchSwap.target!==null)libraryButtons[touchSwap.target].classList.remove('touch-target');
+  touchSwap.target=target;
+  if(target!==null&&target!==touchSwap.from)libraryButtons[target].classList.add('touch-target');
+ },{passive:false});
+ libraryGrid.addEventListener('touchend',e=>{
+  if(!touchSwap)return;
+  if(!touchSwap.active){touchSwapClear();return;}
+  e.preventDefault();
+  const from=touchSwap.from;
+  const t=e.changedTouches[0];
+  const to=touchSwapTarget(t.clientX,t.clientY);
+  touchSwapClear();
+  touchSwapSuppressClick=true;
+  setTimeout(()=>{touchSwapSuppressClick=false},450);
+  if(to!==null&&to!==from){
+   [librarySlots[from],librarySlots[to]]=[librarySlots[to],librarySlots[from]];
+   librarySwapSource=null;librarySelected=to;
+   $('libraryMessage').textContent=libraryNumber(from)+' と '+libraryNumber(to)+' を入れ替えました。';
+  }else{$('libraryMessage').textContent='移動をキャンセルしました。';}
+  libraryRender();
+ },{passive:false});
+ libraryGrid.addEventListener('touchcancel',touchSwapClear,{passive:true});
+ libraryGrid.addEventListener('click',e=>{
+  if(touchSwapSuppressClick){e.preventDefault();e.stopImmediatePropagation();}
+ },true);
+ function multiDownload(entry,i){const a=document.createElement('a');a.href=entry.url;a.download=libraryName(i);document.body.appendChild(a);a.click();a.remove();}
+ $('libraryMultiToggle').onclick=()=>{libraryMultiMode=!libraryMultiMode;libraryMultiSelected.clear();librarySwapSource=null;touchSwapClear();$('libraryMessage').textContent=libraryMultiMode?'複数選択：登録済みの番号をタップしてください。':'通常の1枚選択に戻りました。';libraryRender();};
+ $('libraryMultiAll').onclick=()=>{for(let i=0;i<56;i++)if(librarySlots[i])libraryMultiSelected.add(i);libraryRender();};
+ $('libraryMultiClear').onclick=()=>{libraryMultiSelected.clear();libraryRender();};
+ $('libraryMultiSave').onclick=()=>{const chosen=[...libraryMultiSelected].filter(i=>librarySlots[i]).sort((a,b)=>a-b);if(!chosen.length)return;if(chosen.length>1&&!confirm(chosen.length+'枚のPNGを順番にダウンロードします。ブラウザから複数ダウンロードの許可を求められる場合があります。続けますか？'))return;chosen.forEach((i,n)=>setTimeout(()=>multiDownload(librarySlots[i],i),n*500));$('libraryMessage').textContent=chosen.length+'枚のPNG保存を開始しました。保存されない場合はブラウザの複数ダウンロード許可を確認してください。';};
+ $('libraryMultiDelete').onclick=()=>{const chosen=[...libraryMultiSelected].filter(i=>librarySlots[i]).sort((a,b)=>a-b);if(!chosen.length)return;if(!confirm('選択した'+chosen.length+'枚（'+chosen.map(libraryNumber).join('、')+'）を管理一覧から削除しますか？ この操作は元に戻せません。'))return;for(const i of chosen)librarySlots[i]=null;libraryMultiSelected.clear();$('libraryMessage').textContent=chosen.length+'枚を削除しました。';libraryRender();};
+ $('libraryRegister').onclick=()=>{
+  if(!img){$('libraryMessage').textContent='先に画像を読み込んでください。';return}
+  if(librarySlots[librarySelected]&&!confirm(libraryNumber(librarySelected)+' の画像を上書きしますか？'))return;
+  const canvas=finalOutput(idx),url=canvas.toDataURL('image/png');
+  librarySlots[librarySelected]={url};
+  $('libraryMessage').textContent='完成画像 '+String(idx+1).padStart(2,'0')+' を '+libraryName(librarySelected)+' として登録しました。';
+  libraryRender();
+ };
+ $('libraryBatch').onclick=()=>{
+  if(!img){$('libraryMessage').textContent='先に元画像を読み込んでください。';return;}
+  const start=Number($('batchGroup').value);if(!Number.isInteger(start)||start<0||start+sourceCount>56){$('libraryMessage').textContent='登録開始番号を確認してください。';return;}
+  const existing=[];
+  for(let j=0;j<sourceCount;j++)if(librarySlots[start+j])existing.push(libraryNumber(start+j));
+  if(existing.length && !confirm('登録済みの '+existing.join('、')+' を上書きします。よろしいですか？'))return;
+  try{
+   const snapshots=[];
+   for(let j=0;j<sourceCount;j++)snapshots.push({url:finalOutput(j).toDataURL('image/png')});
+   for(let j=0;j<sourceCount;j++)librarySlots[start+j]=snapshots[j];
+   librarySelected=start;
+   $('libraryMessage').textContent=libraryNumber(start)+'〜'+libraryNumber(start+sourceCount-1)+' の'+sourceCount+'枚を登録しました。';
+   libraryRender();
+   const next=start+sourceCount;if(next+sourceCount<=56)refreshBatchOptions(next);
+  }catch(err){$('libraryMessage').textContent='一括登録できませんでした。画像のサイズや端末のメモリを確認してください。';}
+ };
+ $('libraryDelete').onclick=()=>{
+  if(!librarySlots[librarySelected])return;
+  if(!confirm(libraryName(librarySelected)+' を管理一覧から削除しますか？'))return;
+  librarySlots[librarySelected]=null;$('libraryMessage').textContent='削除しました。';libraryRender();
+ };
+ $('librarySwap').onclick=()=>{
+  if(librarySwapSource!==null){librarySwapSource=null;$('libraryMessage').textContent='並べ替えをキャンセルしました。'}
+  else if(!librarySlots[librarySelected]){$('libraryMessage').textContent='移動元には登録済みの枠を選んでください。';return}
+  else{librarySwapSource=librarySelected;$('libraryMessage').textContent='移動先の番号をタップすると、2つの枠を入れ替えます。';}
+  libraryRender();
+ };
+ $('librarySave').onclick=()=>{
+  const entry=librarySlots[librarySelected];if(!entry)return;
+  const a=document.createElement('a');a.href=entry.url;a.download=libraryName(librarySelected);document.body.appendChild(a);a.click();a.remove();
+ };
+
+  // STEP 13: main.png and tab.png composition from registered finished artwork.
+  const assetCanvas=$('assetCanvas'),assetCtx=assetCanvas.getContext('2d');
+  const assetModes={main:{source:null,scale:1,x:0,y:0},tab:{source:null,scale:1,x:0,y:0}};
+  let assetMode='main',assetImage=null,assetImageUrl=null,assetPointer=null;
+  const assetDims=kind=>kind==='main'?{w:240,h:240}:{w:96,h:74};
+  function assetSelected(){return assetModes[assetMode]}
+  function assetRender(){
+   const {w,h}=assetDims(assetMode),a=assetSelected();assetCanvas.width=w;assetCanvas.height=h;
+   assetCtx.clearRect(0,0,w,h);
+   if(assetImage&&assetImageUrl===a.source){
+    const fit=Math.min(w/assetImage.naturalWidth,h/assetImage.naturalHeight);
+    const dw=assetImage.naturalWidth*fit*a.scale,dh=assetImage.naturalHeight*fit*a.scale;
+    assetCtx.drawImage(assetImage,(w-dw)/2+a.x,(h-dh)/2+a.y,dw,dh);
+   }
+   $('assetScale').value=String(Math.round(a.scale*100));$('assetScaleValue').textContent=Math.round(a.scale*100)+'%';
+   $('assetMain').classList.toggle('active',assetMode==='main');$('assetTab').classList.toggle('active',assetMode==='tab');
+   $('assetDimension').textContent=(assetMode==='main'?'メイン画像：240 × 240px（main.png）':'タブ画像：96 × 74px（tab.png）');
+  }
+  function assetLoad(){
+   const a=assetSelected();assetImage=null;assetImageUrl=null;
+   if(!a.source){assetRender();return}
+   const entry=librarySlots.find(e=>e&&e.url===a.source);
+   if(!entry){a.source=null;assetRender();return}
+   const im=new Image(),url=a.source;
+   im.onload=()=>{if(assetSelected().source!==url)return;assetImage=im;assetImageUrl=url;assetRender()};
+   im.onerror=()=>{$('assetStatus').textContent='画像を読み込めませんでした。';assetRender()};im.src=url;
+  }
+  function assetChoices(){
+   const sel=$('assetSource'),a=assetSelected(),old=a.source;
+   sel.replaceChildren();const empty=document.createElement('option');empty.value='';empty.textContent='完成画像を選択';sel.appendChild(empty);
+   for(let i=0;i<56;i++)if(librarySlots[i]){const o=document.createElement('option');o.value=String(i);o.textContent=libraryNumber(i)+(i>=registrationCount?'（予備）':'（登録用）');sel.appendChild(o)}
+   const ix=librarySlots.findIndex(e=>e&&e.url===old);sel.value=ix<0?'':String(ix);
+   if(ix<0&&old){a.source=null;assetLoad()}
+  }
+  function assetSetMode(mode){assetMode=mode;assetChoices();assetLoad()}
+  $('assetMain').onclick=()=>assetSetMode('main');$('assetTab').onclick=()=>assetSetMode('tab');
+  $('assetSource').onchange=()=>{const ix=Number($('assetSource').value);const a=assetSelected();a.source=$('assetSource').value===''?null:librarySlots[ix]?.url||null;a.scale=1;a.x=0;a.y=0;assetLoad();$('assetStatus').textContent=a.source?'画像を選択しました。位置・拡大率を調整してください。':'完成画像を選択してください。';};
+  $('assetScale').oninput=e=>{assetSelected().scale=Number(e.target.value)/100;assetRender();markProjectDirty()};
+  $('assetFit').onclick=()=>{assetSelected().scale=1;assetSelected().x=0;assetSelected().y=0;assetRender()};
+  $('assetCenter').onclick=()=>{assetSelected().x=0;assetSelected().y=0;assetRender()};
+  assetCanvas.addEventListener('pointerdown',e=>{if(!assetImage)return;e.preventDefault();assetCanvas.setPointerCapture(e.pointerId);assetPointer={id:e.pointerId,x:e.clientX,y:e.clientY}});
+  assetCanvas.addEventListener('pointermove',e=>{if(!assetPointer||assetPointer.id!==e.pointerId)return;e.preventDefault();const r=assetCanvas.getBoundingClientRect(),a=assetSelected();a.x+=(e.clientX-assetPointer.x)*assetCanvas.width/r.width;a.y+=(e.clientY-assetPointer.y)*assetCanvas.height/r.height;assetPointer.x=e.clientX;assetPointer.y=e.clientY;assetRender();});
+  function assetPointerEnd(e){if(assetPointer&&assetPointer.id===e.pointerId){assetPointer=null;markProjectDirty()}}
+  assetCanvas.addEventListener('pointerup',assetPointerEnd);assetCanvas.addEventListener('pointercancel',assetPointerEnd);
+  function assetExport(kind){return new Promise((resolve,reject)=>{
+   const a=assetModes[kind],entry=librarySlots.find(e=>e&&e.url===a.source);if(!entry){reject(new Error((kind==='main'?'メイン':'タブ')+'画像の元画像を選択してください。'));return}
+   const im=new Image();im.onload=()=>{const {w,h}=assetDims(kind),c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d'),fit=Math.min(w/im.naturalWidth,h/im.naturalHeight),dw=im.naturalWidth*fit*a.scale,dh=im.naturalHeight*fit*a.scale;g.drawImage(im,(w-dw)/2+a.x,(h-dh)/2+a.y,dw,dh);save(c,kind+'.png');resolve()};im.onerror=()=>reject(new Error('元画像を読み込めませんでした。'));im.src=entry.url;
+  })}
+  $('assetSaveCurrent').onclick=async()=>{try{await assetExport(assetMode);$('assetStatus').textContent=(assetMode==='main'?'main.png':'tab.png')+' の保存を開始しました。'}catch(e){$('assetStatus').textContent=e.message}};
+  $('assetSaveBoth').onclick=async()=>{try{await assetExport('main');await new Promise(r=>setTimeout(r,500));await assetExport('tab');$('assetStatus').textContent='main.png と tab.png の保存を開始しました。'}catch(e){$('assetStatus').textContent=e.message}};
+  const oldLibraryRender=libraryRender;
+  // Rebuild the asset source selector whenever registered artwork changes.
+  // The wrapper is attached to calls below through a microtask after each click.
+  $('librarySection').addEventListener('click',()=>queueMicrotask(assetChoices));
+
+ // STEP 13: portable, explicit project save/load. No server or browser storage.
+ let projectDirty=false,projectBusy=false,projectRestoring=false;
+ function markProjectDirty(){if(projectRestoring||projectBusy)return;projectDirty=true;$('projectStatus').textContent='● 未保存の変更があります。終了前にプロジェクトを保存してください。';syncProjectControls();}
+ function projectClean(message){projectDirty=false;$('projectStatus').textContent=message;syncProjectControls();}
+ document.addEventListener('change',e=>{if(e.target.id!=='projectOpen')markProjectDirty()},true);
+ document.addEventListener('click',e=>{if(e.target.closest('button')&&!e.target.closest('#projectSection'))markProjectDirty()},true);
+ for(const el of [viewport,pv,placement,libraryGrid])el.addEventListener('pointerup',markProjectDirty,true);
+ libraryGrid.addEventListener('touchend',markProjectDirty,true);
+ window.addEventListener('beforeunload',e=>{if(projectDirty){e.preventDefault();e.returnValue='';}});
+ function imageAsPng(im){const c=document.createElement('canvas');c.width=im.naturalWidth||im.width;c.height=im.naturalHeight||im.height;c.getContext('2d').drawImage(im,0,0);return c.toDataURL('image/png')}
+ function canvasAsPng(c){return c?c.toDataURL('image/png'):null}
+ function makeProjectData(){
+  captureSource();
+  return {app:'gudeko-line-cutout',version:1,savedAt:new Date().toISOString(),format,registrationCount,sourceIndex,librarySelected,assetModes,
+   threshold:Number($('threshold').value),margin:Number($('margin').value),brushSize,
+   sheets:sourceSheets.map(a=>({fileName:a.fileName,layout:a.layout,count:layoutCount(a.layout,a.count),backgroundMode:a.backgroundMode||'auto',image:imageAsPng(a.image),idx:a.idx,
+    polys:a.polys,customRects:a.customRects,placements:a.placements,
+    edits:a.edits.map(canvasAsPng)})),
+   librarySlots:librarySlots.map(a=>a?a.url:null)};
+ }
+ function projectSizeText(bytes){return bytes>=1048576?(bytes/1048576).toFixed(1)+' MB':(bytes/1024).toFixed(0)+' KB'}
+ function projectDiagnostics(data){
+  const registered=data.librarySlots.filter(Boolean).length,edited=data.sheets.reduce((n,a)=>n+a.edits.filter(Boolean).length,0);
+  return '元画像 '+data.sheets.length+'/7枚 ／ 登録画像 '+registered+'/56枚 ／ ブラシ修正 '+edited+'枚';
+ }
+ async function projectDigest(value){
+  if(!window.crypto||!crypto.subtle)return null;
+  const bytes=new TextEncoder().encode(value),digest=await crypto.subtle.digest('SHA-256',bytes);
+  return Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+ }
+ function downloadProject(text){const blob=new Blob([text],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='LINE作業プロジェクト_'+new Date().toLocaleString('sv-SE').replace(/[-: ]/g,'').replace('T','_').replace(/^(\d{8})(\d{6})$/,'$1_$2')+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}
+ $('compactProjectSave').addEventListener('click',()=>$('projectSave').click());
+ $('projectSave').addEventListener('click',async()=>{
+  if(projectBusy)return;projectBusy=true;$('projectSave').disabled=true;$('compactProjectSave').disabled=true;$('projectStatus').textContent='保存ファイルを準備しています…';syncProjectControls();
+  try{await new Promise(r=>setTimeout(r,30));const data=makeProjectData(),payload=JSON.stringify(data);
+   $('projectDiagnostics').textContent='保存前チェック：'+projectDiagnostics(data);
+   const hash=await projectDigest(payload);
+   const json=JSON.stringify({ ...data,integrity:hash?{algorithm:'SHA-256',hash}:null });
+   const bytes=new Blob([json]).size;
+   if(bytes>100*1048576&&!confirm('保存ファイルが '+projectSizeText(bytes)+' と大きくなっています。iPhoneでは保存に時間がかかる可能性があります。続けますか？')){markProjectDirty();$('projectStatus').textContent='保存をキャンセルしました。';syncProjectControls();return;}
+   downloadProject(json);
+   projectClean('✓ 保存ファイルの作成を開始しました（'+projectSizeText(bytes)+'）。ダウンロード先にJSONファイルがあることを確認してください。 '+projectDiagnostics(data));}
+  catch(err){projectDirty=true;$('projectStatus').textContent='保存に失敗しました：'+(err.message||err)+'。画像を減らすかPCで試してください。';syncProjectControls();}
+  finally{projectBusy=false;$('projectSave').disabled=false;$('compactProjectSave').disabled=false;syncProjectControls();}
+ });
+ function decodeProjectImage(url){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error('保存画像を読み込めませんでした'));im.src=url;});}
+ async function decodeProjectCanvas(url){if(!url)return null;const im=await decodeProjectImage(url);const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);return c;}
+ function checkProject(data){
+  if(!data||data.app!=='gudeko-line-cutout'||data.version!==1)throw Error('対応していないプロジェクトファイルです。');
+  if(!['sticker','emoji'].includes(data.format))throw Error('画像の種類が不正です。');
+  const validCounts=data.format==='emoji'?Array.from({length:33},(_,i)=>i+8):[8,16,24,32,40];
+  if(!validCounts.includes(data.registrationCount))throw Error('登録個数が不正です。');
+  if(!Array.isArray(data.sheets)||data.sheets.length>7||!Array.isArray(data.librarySlots)||data.librarySlots.length!==56)throw Error('保存データの構成が不正です。');
+  if(data.sheets.some(a=>!a||!['4x2','2x4','1','custom'].includes(a.layout)||(a.layout==='custom'&&(!Number.isInteger(a.count)||a.count<2||a.count>7))||typeof a.image!=='string'||!a.image.startsWith('data:image/')||!Array.isArray(a.polys)||a.polys.length!==8||!Array.isArray(a.customRects)||a.customRects.length!==8||!Array.isArray(a.placements)||a.placements.length!==8||!Array.isArray(a.edits)||a.edits.length!==8))throw Error('元画像の編集データが不正です。');
+  if(data.librarySlots.some(a=>a!==null&&(typeof a!=='string'||!a.startsWith('data:image/png;base64,'))))throw Error('登録画像の形式が不正です。');
+ }
+ $('projectOpen').addEventListener('change',async e=>{
+  const file=e.target.files&&e.target.files[0];if(!file)return;
+  e.target.value='';
+  if(projectBusy)return;
+  if((sourceSheets.length||librarySlots.some(Boolean))&&!confirm('現在の作業を、保存ファイルの内容で置き換えます。未保存の作業は消えます。続けますか？'))return;
+  projectBusy=true;projectRestoring=true;$('projectStatus').textContent='保存ファイルを読み込み中です…';syncProjectControls();
+  try{
+   if(file.size>250*1048576&&!confirm('ファイル容量は '+projectSizeText(file.size)+' です。端末のメモリ不足に注意してください。読み込みますか？'))return;
+   const data=JSON.parse(await file.text());checkProject(data);
+   if(data.integrity){
+    if(data.integrity.algorithm!=='SHA-256'||typeof data.integrity.hash!=='string')throw Error('保存ファイルの整合性情報が不正です。');
+    const {integrity,...payload}=data;
+    const hash=await projectDigest(JSON.stringify(payload));
+    if(hash&&hash!==integrity.hash)throw Error('保存ファイルの整合性チェックに失敗しました。ファイルが破損または変更された可能性があります');
+   }
+   $('projectDiagnostics').textContent='読み込み前チェック：'+projectDiagnostics(data)+' ／ '+projectSizeText(file.size);
+   // Decode every source and edited canvas before replacing any live work.
+   const restored=[];
+   for(let k=0;k<data.sheets.length;k++){
+    const a=data.sheets[k];$('projectStatus').textContent='元画像 '+(k+1)+' / '+data.sheets.length+' を復元中…';
+    const im=await decodeProjectImage(a.image);
+    const restoredEdits=[];for(const url of a.edits)restoredEdits.push(await decodeProjectCanvas(url));
+    restored.push({image:im,fileName:String(a.fileName||'元画像'+(k+1)),layout:a.layout,count:layoutCount(a.layout,a.count),backgroundMode:a.backgroundMode||'auto',idx:Math.max(0,Math.min(layoutCount(a.layout,a.count)-1,Number(a.idx)||0)),
+     polys:a.polys,customRects:a.customRects,boundsUndo:Array.from({length:8},()=>[]),edits:restoredEdits,
+     histories:Array.from({length:8},()=>[]),placements:a.placements.map(t=>({scale:Number(t.scale)||1,x:Number(t.x)||0,y:Number(t.y)||0})),placeHistory:Array.from({length:8},()=>[])});
+   }
+   img=null;sourceIndex=-1;sourceSheets=[];
+   // setFormat resets current brush state, so apply it before loading restored sheets.
+   if(format!==data.format)setFormat(data.format);
+   sourceSheets=restored;
+   registrationCount=data.registrationCount;refreshRegistrationChoices();registrationCount=data.registrationCount;registrationCountEl.value=String(registrationCount);
+   $('threshold').value=String(Math.max(5,Math.min(100,Number(data.threshold)||35)));$('tv').textContent=$('threshold').value;
+   $('margin').value=String(Math.max(0,Math.min(Number($('margin').max),(Number.isFinite(Number(data.margin))?Number(data.margin):10))));$('marginValue').textContent=$('margin').value;
+   brushSize=Math.max(1,Math.min(90,Number(data.brushSize)||18));$('brushSize').value=String(brushSize);$('brushValue').textContent=String(brushSize);updateBrushSizePreview();updateFloatingBrush();
+   for(let i=0;i<56;i++)librarySlots[i]=data.librarySlots[i]?{url:data.librarySlots[i]}:null;
+   librarySelected=Math.max(0,Math.min(55,Number(data.librarySelected)||0));librarySwapSource=null;libraryMultiMode=false;libraryMultiSelected.clear();
+   if(sourceSheets.length){switchSource(Math.max(0,Math.min(sourceSheets.length-1,Number(data.sourceIndex)||0)));}
+   else{sourceUI();$('status').textContent='画像を選択してください';}
+   libraryRender();if(data.assetModes){for(const key of ['main','tab'])if(data.assetModes[key])Object.assign(assetModes[key],data.assetModes[key]);}assetChoices();assetLoad();projectClean('✓ '+projectDiagnostics(data)+' を復元しました。編集を再開できます。');
+  }catch(err){projectDirty=true;$('projectStatus').textContent='読み込みに失敗しました：'+(err.message||err)+'。元のファイルを確認してください。';syncProjectControls();}
+  finally{projectRestoring=false;projectBusy=false;}
+ });
+ updateSourceFileCount();
+ refreshRegistrationChoices();
+ refreshBatchOptions(0);
+ const originalSetFormat=setFormat;
+ // Library images are retained in their original pixel dimensions when changing output mode.
+ $('formatSticker').addEventListener('click',refreshRegistrationChoices);
+ $('formatEmoji').addEventListener('click',refreshRegistrationChoices);
+ libraryRender();
+resetPreviewView();updateUndo();updateBrushSizePreview();updateFloatingBrush();
+})();
+</script></body></html>
